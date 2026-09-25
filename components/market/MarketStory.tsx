@@ -5,13 +5,25 @@ import { FeaturedMarketMetric } from "./FeaturedMarketMetric";
 
 export function MarketStory() {
   const ref = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const section = ref.current;
+    const video = videoRef.current;
     if (!section) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) section.classList.add("market-visible");
+        if (entry.isIntersecting) {
+          section.classList.add("market-visible");
+          if (video && video.paused) {
+            video.play().catch(() => {});
+          }
+        } else {
+          if (video && !video.paused) {
+            video.pause();
+          }
+        }
       },
       { threshold: 0.05 }
     );
@@ -24,11 +36,11 @@ export function MarketStory() {
       {/* 1. Full-Section Atmospheric Background Video Layer */}
       <div className="market-video-backdrop" aria-hidden="true">
         <video
-          autoPlay
+          ref={videoRef}
           loop
           muted
           playsInline
-          preload="auto"
+          preload="none"
           className="market-bg-video"
           src="/ascii-animation (2).mp4"
         />

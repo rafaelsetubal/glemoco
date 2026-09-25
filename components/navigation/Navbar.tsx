@@ -33,7 +33,7 @@ export function Navbar() {
 
   return <header className={`nav ${scrolled ? "nav-scrolled" : ""} ${hidden && !open ? "nav-hidden" : ""}`}>
     <div className="glemo-container nav-inner">
-      <a href="#top" className="brand" aria-label="GlemO home"><img src="/brand/glemo-official.png" alt="GlemO" /></a>
+      <a href="#top" className="brand" aria-label="GlemO home"><img src="/brand/glemo-official.webp" alt="GlemO" width="142" height="45" /></a>
       <nav>{links.map(link => <a href={link === "Marketplace" ? "#marketplace" : link === "Ecosystem" ? "#ecosystem" : "#"} key={link}>{link}</a>)}<a className="contact" href="#contact">Contact <ArrowUpRight size={14} /></a></nav>
       <button className="menu" onClick={() => setOpen(!open)} aria-label={open ? "Close navigation" : "Open navigation"}>{open ? <X /> : <Menu />}</button>
     </div>

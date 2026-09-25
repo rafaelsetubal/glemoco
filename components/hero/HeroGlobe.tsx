@@ -109,6 +109,20 @@ export function HeroGlobe() {
       },
       { threshold: 0.01 }
     );
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        visible = false;
+        if (frame) {
+          cancelAnimationFrame(frame);
+          frame = 0;
+        }
+      } else {
+        visible = true;
+        if (!frame) animate();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     const ro = new ResizeObserver(resize);
     ro.observe(el);
     resize();
@@ -122,6 +136,7 @@ export function HeroGlobe() {
     return () => {
       ro.disconnect();
       observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       cancelAnimationFrame(frame);
       removeEventListener("resize", resize);
       el.removeEventListener("pointerdown", down);

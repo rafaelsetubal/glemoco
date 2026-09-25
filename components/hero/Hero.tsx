@@ -1,9 +1,17 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import { ArrowUpRight } from "lucide-react";
 import { BackgroundParticles } from "./BackgroundParticles";
-import { HeroGlobe } from "./HeroGlobe";
+
+const HeroGlobe = dynamic(
+  () => import("./HeroGlobe").then((mod) => mod.HeroGlobe),
+  {
+    ssr: false,
+    loading: () => <div className="globe" style={{ opacity: 0 }} aria-hidden="true" />,
+  }
+);
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -13,23 +21,37 @@ export function Hero() {
     const hero = ref.current;
     if (!hero) return;
 
-    // Subtle pointer parallax on atmospheric glow
+    let rafId: number | null = null;
+    let targetX = 0;
+    let targetY = 0;
+
+    // Subtle pointer parallax on atmospheric glow throttled by RAF
     const move = (e: PointerEvent) => {
-      if (!atmosphereRef.current) return;
-      const x = (e.clientX / innerWidth - 0.5) * 16;
-      const y = (e.clientY / innerHeight - 0.5) * 14;
-      atmosphereRef.current.style.transform = `translate3d(${x}px, ${y - 50}%, 0)`;
+      targetX = (e.clientX / window.innerWidth - 0.5) * 16;
+      targetY = (e.clientY / window.innerHeight - 0.5) * 14;
+
+      if (rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          if (atmosphereRef.current) {
+            atmosphereRef.current.style.transform = `translate3d(${targetX}px, ${targetY - 50}%, 0)`;
+          }
+          rafId = null;
+        });
+      }
     };
 
-    addEventListener("pointermove", move, { passive: true });
-    return () => removeEventListener("pointermove", move);
+    window.addEventListener("pointermove", move, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", move);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
     <section className="hero" id="top" ref={ref}>
       {/* Cinematic High-Res Space Atmosphere Background */}
       <div className="hero-bg-backdrop" aria-hidden="true">
-        <img src="/hero-bg.png" alt="" className="hero-bg-img" />
+        <img src="/hero-bg.webp" alt="" className="hero-bg-img" fetchPriority="high" />
         <div className="hero-bg-vignette" />
       </div>
 
@@ -81,7 +103,7 @@ export function Hero() {
         <div className="hero-visual">
           {/* Mobile Featured Centered Logo ABOVE the Globe */}
           <div className="hero-mobile-brand" aria-hidden="true">
-            <img src="/brand/glemo-official.png" alt="GlemO" />
+            <img src="/brand/glemo-official.webp" alt="GlemO" width="220" height="70" />
           </div>
 
           <div className="hero-globe-wrapper">

@@ -16,16 +16,29 @@ export function VisionSection() {
     );
     observer.observe(section);
 
+    let rafId: number | null = null;
+    let targetX = 0;
+    let targetY = 0;
+
     const move = (event: PointerEvent) => {
-      const architecture = section.querySelector<HTMLElement>(".vision-architecture-mid");
-      if (architecture) {
-        architecture.style.transform = `translate3d(${(event.clientX - innerWidth / 2) * 0.004}px,${(event.clientY - innerHeight / 2) * 0.003}px,0)`;
+      targetX = (event.clientX - window.innerWidth / 2) * 0.004;
+      targetY = (event.clientY - window.innerHeight / 2) * 0.003;
+
+      if (rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          const architecture = section.querySelector<HTMLElement>(".vision-architecture-mid");
+          if (architecture) {
+            architecture.style.transform = `translate3d(${targetX}px,${targetY}px,0)`;
+          }
+          rafId = null;
+        });
       }
     };
-    section.addEventListener("pointermove", move);
+    section.addEventListener("pointermove", move, { passive: true });
     return () => {
       observer.disconnect();
       section.removeEventListener("pointermove", move);
+      if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, []);
 
@@ -61,10 +74,10 @@ export function VisionSection() {
 
         {/* Right Visual Stage (Buildings + Blue Rim Light + Founder Cutout) */}
         <div className="vision-stage" aria-hidden="true">
-          <img className="vision-architecture vision-architecture-back" src="/buildings.svg" alt="" />
-          <img className="vision-architecture vision-architecture-mid" src="/buildings.svg" alt="" />
+          <img className="vision-architecture vision-architecture-back" src="/buildings.svg" alt="" width="520" height="600" loading="lazy" decoding="async" />
+          <img className="vision-architecture vision-architecture-mid" src="/buildings.svg" alt="" width="520" height="600" loading="lazy" decoding="async" />
           <div className="vision-light" />
-          <img className="vision-founder" src="/founder/gleisson-herit-cutout.png" alt="Gleisson Oliveira Herit" />
+          <img className="vision-founder" src="/founder/gleisson-herit-cutout.webp" alt="Gleisson Oliveira Herit" width="580" height="740" loading="lazy" decoding="async" />
         </div>
       </div>
     </section>

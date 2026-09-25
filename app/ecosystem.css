@@ -1,5 +1,5 @@
 .ecosystem{position:relative;isolation:isolate;overflow:hidden;background:#020507;color:#eef2f5;border-top:1px solid rgba(255,255,255,.05);padding:64px 0 110px;scroll-margin-top:76px}
-.ecosystem:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,#020507 0%,rgba(2,5,7,.64) 25%,rgba(2,5,7,.3) 62%,rgba(2,5,7,.12) 100%),url('/ecosystem/earth-horizon.png') center bottom / 100% auto no-repeat}
+.ecosystem:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,#020507 0%,rgba(2,5,7,.64) 25%,rgba(2,5,7,.3) 62%,rgba(2,5,7,.12) 100%),url('/ecosystem/earth-horizon.webp') center bottom / 100% auto no-repeat}
 .eco-container{position:relative}
 .eco-container:before{content:"";position:absolute;inset:-64px var(--site-gutter) -110px;border-inline:1px solid rgba(255,255,255,.035);pointer-events:none}
 .eco-label{display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:.24em;margin:0 0 36px;color:#bdc7cd}

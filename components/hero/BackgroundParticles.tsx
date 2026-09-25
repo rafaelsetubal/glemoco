@@ -194,6 +194,20 @@ export function BackgroundParticles() {
       { threshold: 0.01 }
     );
 
+    const handleVisibility = () => {
+      if (document.hidden) {
+        visible = false;
+        if (frame) {
+          cancelAnimationFrame(frame);
+          frame = 0;
+        }
+      } else {
+        visible = true;
+        if (!frame && !reduced) frame = requestAnimationFrame(draw);
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+
     observer.observe(canvas);
     size();
     draw();
@@ -202,6 +216,7 @@ export function BackgroundParticles() {
 
     return () => {
       observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibility);
       cancelAnimationFrame(frame);
       removeEventListener("resize", size);
       removeEventListener("pointermove", move);

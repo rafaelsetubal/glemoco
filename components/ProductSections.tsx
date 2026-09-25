@@ -11,8 +11,8 @@ const capabilityDetails = [
 ];
 
 const products = [
-  { id: "web2", label: "05 — WEB2", title: <>Built for the<br />market of today.</>, copy: "glemO connects demand, qualification and distribution through a mature digital real estate infrastructure.", capabilities: ["ACQUISITION", "QUALIFICATION", "DISTRIBUTION"], image: "/products/web2.png", alt: "glemO domestic and international real estate marketplaces displayed on two laptops", width: 1448, height: 1086 },
-  { id: "web3", label: "06 — WEB3", title: <>Building the infrastructure<br />for what comes next.</>, copy: "glemO is developing an RWA platform designed to connect real-world assets, digital ownership and new incentive models.", capabilities: ["RWA", "TOKENIZATION", "DISTRIBUTION"], image: "/products/rwa.png", alt: "glemO RWA platform mockup showing asset offerings and the investor conversion journey", width: 1225, height: 1284 },
+  { id: "web2", label: "05 — WEB2", title: <>Built for the<br />market of today.</>, copy: "glemO connects demand, qualification and distribution through a mature digital real estate infrastructure.", capabilities: ["ACQUISITION", "QUALIFICATION", "DISTRIBUTION"], image: "/products/web2.webp", alt: "glemO domestic and international real estate marketplaces displayed on two laptops", width: 1448, height: 1086 },
+  { id: "web3", label: "06 — WEB3", title: <>Building the infrastructure<br />for what comes next.</>, copy: "glemO is developing an RWA platform designed to connect real-world assets, digital ownership and new incentive models.", capabilities: ["RWA", "TOKENIZATION", "DISTRIBUTION"], image: "/products/rwa.webp", alt: "glemO RWA platform mockup showing asset offerings and the investor conversion journey", width: 1225, height: 1284 },
 ];
 
 export function ProductSections() {

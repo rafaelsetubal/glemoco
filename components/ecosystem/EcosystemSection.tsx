@@ -87,8 +87,8 @@ export function EcosystemSection() {
         <div className="eco-spine" aria-hidden="true"><i className="eco-spine-node" /></div>
         <Layer items={transaction} web="WEB2" name="TRANSACTION LAYER" />
         <figure className="eco-visual">
-          <img src="/ecosystem/connected-layers.png" width="1254" height="1254" loading="lazy" decoding="async" alt="Two glemO mobile experiences connected through a luminous blue infrastructure network" />
-          <img className="eco-devices" src="/ecosystem/connected-layers.png" width="1254" height="1254" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+          <img src="/ecosystem/connected-layers.webp" width="1254" height="1254" loading="lazy" decoding="async" alt="Two glemO mobile experiences connected through a luminous blue infrastructure network" />
+          <img className="eco-devices" src="/ecosystem/connected-layers.webp" width="1254" height="1254" loading="lazy" decoding="async" alt="" aria-hidden="true" />
         </figure>
         <svg className="eco-routes" viewBox="0 0 1200 540" preserveAspectRatio="none" aria-hidden="true">
           {connections.map((d, i) => <g className={i < 3 ? "eco-flow-web2" : "eco-flow-web3"} key={d}>

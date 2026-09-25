@@ -60,7 +60,7 @@ export function MarketplaceSection() {
       <p className="mp-sr-only" role="status" aria-live="polite">{visibleApps.length} apps shown. Category: {category}.</p>
       <div className={`mp-grid ${category !== "All" ? "mp-filtered" : ""}`}>
         {visibleApps.map(app => <article key={app.id} className={`mp-card mp-${app.layout} mp-${app.category.toLowerCase()}`}>
-          <img className="mp-art" src={`/marketplace/${app.id}.png`} width="1448" height="1086" loading="lazy" decoding="async" alt="" />
+          <img className="mp-art" src={`/marketplace/${app.id}.webp`} width="1448" height="1086" loading="lazy" decoding="async" alt="" />
           <div className="mp-shade" aria-hidden="true" />
           <div className="mp-card-copy">
             <span className="mp-category"><i aria-hidden="true" />{app.category}</span>
@@ -75,7 +75,7 @@ export function MarketplaceSection() {
     <dialog className="mp-dialog" ref={dialog} aria-labelledby="mp-dialog-title" onClose={() => setSelected(null)} onClick={event => { if (event.target === event.currentTarget) dialog.current?.close(); }}>
       {selected && <div className="mp-dialog-body">
         <button className="mp-close" type="button" aria-label="Close app details" onClick={() => dialog.current?.close()} autoFocus><X size={22} /></button>
-        <img src={`/marketplace/${selected.id}.png`} alt="" width="1448" height="1086" />
+        <img src={`/marketplace/${selected.id}.webp`} alt="" width="1448" height="1086" loading="lazy" decoding="async" />
         <div className="mp-dialog-copy"><span className="mp-category">{selected.category}</span><h2 id="mp-dialog-title">{selected.title}</h2><p className="mp-subtitle">{selected.subtitle}</p><p>{selected.description}</p><ul>{selected.features.map(feature => <li key={feature}>{feature}</li>)}</ul></div>
       </div>}
     </dialog>
