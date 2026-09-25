@@ -70,26 +70,14 @@ export function Hero() {
 
           <h1 className="hero-headline">
             <span className="hero-headline-desktop">
-              <span className="hero-line-wrap">
-                <AnimatedWords text={t.hero.headlineDesktop.line1} startIdx={0} />
-              </span>
-              <span className="hero-line-wrap">
-                <AnimatedWords text={t.hero.headlineDesktop.line2} startIdx={4} />
-              </span>
-              <span className="hero-line-wrap">
-                <AnimatedWords text={t.hero.headlineDesktop.line3} startIdx={8} />
-              </span>
+              <span className="hero-headline-line line-1">{t.hero.headlineDesktop.line1}</span>
+              <span className="hero-headline-line line-2">{t.hero.headlineDesktop.line2}</span>
+              <span className="hero-headline-line line-3">{t.hero.headlineDesktop.line3}</span>
             </span>
             <span className="hero-headline-mobile">
-              <span className="hero-line-wrap">
-                <AnimatedWords text={t.hero.headlineMobile.line1} startIdx={0} />
-              </span>
-              <span className="hero-line-wrap">
-                <AnimatedWords text={t.hero.headlineMobile.line2} startIdx={3} />
-              </span>
-              <span className="hero-line-wrap">
-                <AnimatedWords text={t.hero.headlineMobile.line3} startIdx={6} />
-              </span>
+              <span className="hero-headline-line line-1">{t.hero.headlineMobile.line1}</span>
+              <span className="hero-headline-line line-2">{t.hero.headlineMobile.line2}</span>
+              <span className="hero-headline-line line-3">{t.hero.headlineMobile.line3}</span>
             </span>
           </h1>
 
@@ -144,22 +132,5 @@ export function Hero() {
         </div>
       </div>
     </section>
-  );
-}
-
-function AnimatedWords({ text, startIdx = 0 }: { text: string; startIdx?: number }) {
-  const words = text.split(" ");
-  return (
-    <>
-      {words.map((word, i) => (
-        <span
-          key={i}
-          className="hero-word-token"
-          style={{ "--word-i": startIdx + i } as React.CSSProperties}
-        >
-          {word}&nbsp;
-        </span>
-      ))}
-    </>
   );
 }
