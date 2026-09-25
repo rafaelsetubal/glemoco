@@ -4,6 +4,7 @@ import { Menu, X, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const links = ["About", "Ecosystem", "Marketplace", "Roadmap", "Events"];
+const sectionHref = (link: string) => link === "About" ? "#leadership" : link === "Events" ? "#events" : link === "Roadmap" ? "#roadmap" : link === "Marketplace" ? "#marketplace" : link === "Ecosystem" ? "#ecosystem" : "#";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -34,9 +35,9 @@ export function Navbar() {
   return <header className={`nav ${scrolled ? "nav-scrolled" : ""} ${hidden && !open ? "nav-hidden" : ""}`}>
     <div className="glemo-container nav-inner">
       <a href="#top" className="brand" aria-label="GlemO home"><img src="/brand/glemo-official.webp" alt="GlemO" width="142" height="45" /></a>
-      <nav>{links.map(link => <a href={link === "Marketplace" ? "#marketplace" : link === "Ecosystem" ? "#ecosystem" : "#"} key={link}>{link}</a>)}<a className="contact" href="#contact">Contact <ArrowUpRight size={14} /></a></nav>
+      <nav>{links.map(link => <a href={sectionHref(link)} key={link}>{link}</a>)}<a className="contact" href="#contact">Contact <ArrowUpRight size={14} /></a></nav>
       <button className="menu" onClick={() => setOpen(!open)} aria-label={open ? "Close navigation" : "Open navigation"}>{open ? <X /> : <Menu />}</button>
     </div>
-    {open && <div className="mobile-overlay"><button onClick={() => setOpen(false)} aria-label="Close navigation"><X /></button>{links.map(link => <a href={link === "Marketplace" ? "#marketplace" : link === "Ecosystem" ? "#ecosystem" : "#"} key={link} onClick={() => setOpen(false)}>{link}</a>)}<a href="#contact">Contact <ArrowUpRight /></a></div>}
+    {open && <div className="mobile-overlay"><button onClick={() => setOpen(false)} aria-label="Close navigation"><X /></button>{links.map(link => <a href={sectionHref(link)} key={link} onClick={() => setOpen(false)}>{link}</a>)}<a href="#contact">Contact <ArrowUpRight /></a></div>}
   </header>;
 }

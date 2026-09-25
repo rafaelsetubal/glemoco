@@ -5,4 +5,7 @@ import { MarketStory } from "@/components/market/MarketStory";
 import { EcosystemSection } from "@/components/ecosystem/EcosystemSection";
 import { ProductSections } from "@/components/ProductSections";
 import { MarketplaceSection } from "@/components/MarketplaceSection";
-export default function Home(){return <main><Navbar/><Hero/><VisionSection/><MarketStory/><EcosystemSection/><ProductSections/><MarketplaceSection/></main>}
+import { NetworkSection } from "@/components/NetworkSection";
+import { RoadmapSection } from "@/components/RoadmapSection";
+import { ClosingSections } from "@/components/ClosingSections";
+export default function Home(){return <main><Navbar/><Hero/><VisionSection/><MarketStory/><EcosystemSection/><ProductSections/><MarketplaceSection/><NetworkSection/><RoadmapSection/><ClosingSections/></main>}

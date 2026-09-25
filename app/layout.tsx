@@ -16,6 +16,9 @@ import "./vision-reference-refine.css";
 import "./ecosystem.css";
 import "./products.css";
 import "./marketplace.css";
+import "./network.css";
+import "./roadmap.css";
+import "./closing.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
