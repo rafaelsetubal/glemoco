@@ -3,17 +3,7 @@
 import { useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Globe2, X } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
-
-const eventImages = [
-  "imgCarrossel13.webp",
-  "imgCarrossel4.webp",
-  "imgInc1.webp",
-  "imgCarrossel5.webp",
-  "imgCarrossel9.webp",
-  "imgCarrossel14.webp",
-  "imgCarrossel8.webp",
-  "imgCarrossel15.webp",
-];
+import { galleryEvents } from "@/lib/gallery-data";
 
 function InstagramIcon() {
   return (
@@ -81,11 +71,14 @@ export function ClosingSections() {
   const [selected, setSelected] = useState(0);
   const dialog = useRef<HTMLDialogElement>(null);
 
-  const eventItems = t.closing.events.items.map((item, i) => ({
-    image: eventImages[i] || "imgCarrossel13.webp",
-    title: item.title,
-    detail: item.detail,
-  }));
+  const eventItems = galleryEvents.map((item, i) => {
+    const translated = t.closing.events.items[i];
+    return {
+      image: item.image,
+      title: translated?.title || item.title,
+      detail: translated?.detail || item.detail,
+    };
+  });
 
   const openPhoto = (index: number) => { setSelected(index); dialog.current?.showModal(); };
   const stepPhoto = (delta: number) => setSelected(index => (index + delta + eventItems.length) % eventItems.length);

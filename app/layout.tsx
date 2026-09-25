@@ -23,6 +23,7 @@ import "./motion-smooth.css";
 import "./preloader.css";
 import { I18nProvider } from "@/lib/i18n/context";
 import { Preloader } from "@/components/Preloader";
+import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -47,7 +48,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
         <Preloader />
-        <I18nProvider>{children}</I18nProvider>
+        <I18nProvider>
+          <ScrollRevealProvider>{children}</ScrollRevealProvider>
+        </I18nProvider>
       </body>
     </html>
   );

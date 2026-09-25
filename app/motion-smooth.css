@@ -1,5 +1,5 @@
 /* ==========================================================================
-   GLEMO HIGH-PERFORMANCE SMOOTH MOTION & VISUAL IMPACT SYSTEM
+   GLEMO HIGH-PERFORMANCE SMOOTH MOTION & SITE-WIDE REVEAL SYSTEM
    GPU-Accelerated (Compositor Thread) • 60-120 FPS • Zero Layout Reflow
    ========================================================================== */
 
@@ -10,7 +10,54 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 2. Micro Pulse for Live Status Indicators */
+/* 2. Site-Wide Scroll Reveal Animations (Silky Blur & Drift) */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(24px) translateZ(0);
+  filter: blur(4px);
+  will-change: transform, opacity, filter;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-init.is-revealed {
+  opacity: 1 !important;
+  transform: translateY(0) translateZ(0) !important;
+  filter: blur(0px) !important;
+}
+
+/* Staggered Child Element Timing */
+.market-metric-strip .metric-col:nth-child(1) { transition-delay: 0.05s; }
+.market-metric-strip .metric-col:nth-child(2) { transition-delay: 0.12s; }
+.market-metric-strip .metric-col:nth-child(3) { transition-delay: 0.19s; }
+.market-metric-strip .metric-col:nth-child(4) { transition-delay: 0.26s; }
+.market-metric-strip .metric-col:nth-child(5) { transition-delay: 0.33s; }
+
+.mp-grid .mp-card:nth-child(1) { transition-delay: 0.04s; }
+.mp-grid .mp-card:nth-child(2) { transition-delay: 0.08s; }
+.mp-grid .mp-card:nth-child(3) { transition-delay: 0.12s; }
+.mp-grid .mp-card:nth-child(4) { transition-delay: 0.16s; }
+.mp-grid .mp-card:nth-child(5) { transition-delay: 0.20s; }
+.mp-grid .mp-card:nth-child(6) { transition-delay: 0.24s; }
+.mp-grid .mp-card:nth-child(7) { transition-delay: 0.28s; }
+.mp-grid .mp-card:nth-child(8) { transition-delay: 0.32s; }
+
+.network-rail .network-evidence:nth-child(1) { transition-delay: 0.08s; }
+.network-rail .network-evidence:nth-child(2) { transition-delay: 0.16s; }
+.network-rail .network-evidence:nth-child(3) { transition-delay: 0.24s; }
+
+.roadmap-phases .roadmap-phase:nth-child(1) { transition-delay: 0.08s; }
+.roadmap-phases .roadmap-phase:nth-child(2) { transition-delay: 0.18s; }
+.roadmap-phases .roadmap-phase:nth-child(3) { transition-delay: 0.28s; }
+
+.events-gallery .event-photo:nth-child(1) { transition-delay: 0.05s; }
+.events-gallery .event-photo:nth-child(2) { transition-delay: 0.12s; }
+.events-gallery .event-photo:nth-child(3) { transition-delay: 0.19s; }
+.events-gallery .event-photo:nth-child(4) { transition-delay: 0.26s; }
+.events-gallery .event-photo:nth-child(5) { transition-delay: 0.33s; }
+
+/* 3. Micro Pulse for Live Status Indicators */
 @keyframes radar-pulse {
   0% {
     transform: scale(0.95);
@@ -33,7 +80,7 @@ html {
   animation: radar-pulse 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* 3. Button Luminous Sheen & Magnetic Lift */
+/* 4. Button Luminous Sheen & Magnetic Lift */
 .closing-button,
 .hero-cta-primary,
 .closing-button--primary {
@@ -79,7 +126,7 @@ html {
   left: 160%;
 }
 
-/* 4. Glass Card Smooth Hover Elevations & Ambient Glow */
+/* 5. Glass Card Smooth Hover Elevations & Ambient Glow */
 .mp-card,
 .roadmap-card,
 .network-evidence,
@@ -130,7 +177,7 @@ html {
   box-shadow: 0 18px 40px -12px rgba(0, 186, 255, 0.22) !important;
 }
 
-/* 5. Subtle Floating Ambient Animation for Indicators */
+/* 6. Subtle Floating Ambient Animation for Indicators */
 @keyframes ambient-float {
   0%, 100% {
     transform: translateY(0) translateZ(0);
@@ -144,7 +191,7 @@ html {
   animation: ambient-float 5s ease-in-out infinite;
 }
 
-/* 6. Filter Chips Elastic Ripple Transition */
+/* 7. Filter Chips Elastic Ripple Transition */
 .mp-filters button {
   position: relative;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
@@ -161,7 +208,7 @@ html {
   box-shadow: 0 0 16px rgba(0, 186, 255, 0.28), inset 0 0 12px rgba(0, 186, 255, 0.18) !important;
 }
 
-/* 7. Section Titles Glowing Shimmer Gradient on Hover/Focus */
+/* 8. Section Titles Glowing Shimmer Gradient on Hover/Focus */
 .mp-heading h2 span,
 .eco-heading h2 span,
 .product-copy h2 span,
@@ -178,7 +225,16 @@ html {
   filter: brightness(1.1);
 }
 
-/* 8. Reduced Motion Preferences */
+/* 9. Lightbox Image Smooth Transition */
+.event-lightbox {
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.event-lightbox img {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 10. Reduced Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -187,5 +243,10 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .reveal-init {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
 }
