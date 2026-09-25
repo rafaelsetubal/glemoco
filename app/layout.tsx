@@ -21,6 +21,7 @@ import "./roadmap.css";
 import "./closing.css";
 import "./motion-smooth.css";
 import "./preloader.css";
+import "./rtl.css";
 import { I18nProvider } from "@/lib/i18n/context";
 import { Preloader } from "@/components/Preloader";
 import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";

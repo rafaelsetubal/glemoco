@@ -1,0 +1,313 @@
+/* =========================================================================
+   glemO.co — RTL & ARABIC LAYOUT PERFECTION (MOBILE & DESKTOP)
+   ========================================================================= */
+
+html[dir="rtl"],
+html.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="rtl"] body,
+html.rtl body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* 1. Global Elements in RTL */
+[dir="rtl"] .arrow-up-right,
+[dir="rtl"] svg.lucide-arrow-up-right {
+  transform: scaleX(-1);
+}
+
+/* 2. Navigation in RTL */
+[dir="rtl"] .nav .contact {
+  flex-direction: row;
+}
+
+[dir="rtl"] .mobile-overlay-nav a {
+  text-align: right;
+}
+
+[dir="rtl"] .mobile-overlay-nav a:hover,
+[dir="rtl"] .mobile-overlay-nav a:active {
+  transform: translateX(-4px);
+}
+
+[dir="rtl"] .lang-menu-glass {
+  right: auto;
+  left: 0;
+}
+
+[dir="rtl"] .lang-option {
+  text-align: right;
+  flex-direction: row-reverse;
+}
+
+/* 3. Hero Section in RTL */
+[dir="rtl"] .hero-narrative {
+  text-align: right;
+}
+
+[dir="rtl"] .hero-eyebrow {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .hero-cta-group {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .hero-cta-primary .cta-arrow {
+  transform: scaleX(-1);
+}
+
+/* 4. Products Section in RTL */
+[dir="rtl"] .product-copy {
+  text-align: right;
+}
+
+[dir="rtl"] .product-label:after {
+  background: linear-gradient(-90deg, #00bde9 0 36px, rgba(161, 201, 224, 0.2) 36px, transparent);
+}
+
+[dir="rtl"] .product-bridge > span {
+  left: auto;
+  right: calc(50% + 20px);
+}
+
+/* 5. Network Section in RTL */
+[dir="rtl"] .network-copy {
+  text-align: right;
+}
+
+[dir="rtl"] .network-eyebrow {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .network-signature {
+  margin-left: 0;
+  margin-right: 0.25rem;
+}
+
+[dir="rtl"] .network-rail {
+  padding-left: 0;
+  padding-right: clamp(3.7rem, 5.2vw, 5.7rem);
+}
+
+[dir="rtl"] .network-rail::before {
+  left: auto;
+  right: clamp(1.65rem, 2.45vw, 2.8rem);
+}
+
+[dir="rtl"] .network-evidence {
+  text-align: right;
+}
+
+[dir="rtl"] .network-evidence__index {
+  left: auto;
+  right: calc(clamp(3.7rem, 5.2vw, 5.7rem) * -1);
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 800px) {
+  [dir="rtl"] .network-rail {
+    padding-left: 0;
+    padding-right: 3.6rem;
+  }
+  [dir="rtl"] .network-rail::before {
+    left: auto;
+    right: 1.5rem;
+  }
+  [dir="rtl"] .network-evidence__index {
+    left: auto;
+    right: -3.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  [dir="rtl"] .network-rail {
+    padding-left: 0;
+    padding-right: 2.85rem;
+  }
+  [dir="rtl"] .network-rail::before {
+    left: auto;
+    right: 1.2rem;
+  }
+  [dir="rtl"] .network-evidence__index {
+    left: auto;
+    right: -2.85rem;
+  }
+}
+
+/* 6. Roadmap Section in RTL */
+[dir="rtl"] .roadmap-heading {
+  left: auto;
+  right: 0;
+  text-align: right;
+}
+
+[dir="rtl"] .roadmap-eyebrow {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .roadmap-card {
+  margin-left: 0;
+  margin-right: 23%;
+  text-align: right;
+}
+
+[dir="rtl"] .roadmap-phase--2 .roadmap-card {
+  margin-right: 0;
+  margin-left: 23%;
+}
+
+[dir="rtl"] .roadmap-card::before {
+  right: auto;
+  left: 100%;
+  background: linear-gradient(-90deg, #4aa9d0, #dbe9ef);
+}
+
+[dir="rtl"] .roadmap-phase--2 .roadmap-card::before {
+  left: auto;
+  right: 100%;
+  background: linear-gradient(-90deg, #dbe9ef, #4aa9d0);
+}
+
+[dir="rtl"] .roadmap-card li {
+  grid-template-columns: 1fr 24px;
+}
+
+[dir="rtl"] .roadmap-card li svg {
+  order: 2;
+}
+
+@media (max-width: 800px) {
+  [dir="rtl"] .roadmap-heading {
+    right: auto;
+  }
+  [dir="rtl"] .roadmap-spine {
+    left: auto;
+    right: 12px;
+  }
+  [dir="rtl"] .roadmap-phase {
+    padding-left: 0;
+    padding-right: 52px;
+  }
+  [dir="rtl"] .roadmap-card,
+  [dir="rtl"] .roadmap-phase--2 .roadmap-card {
+    margin: 0;
+  }
+  [dir="rtl"] .roadmap-node {
+    left: auto;
+    right: 12px;
+  }
+  [dir="rtl"] .roadmap-card::before,
+  [dir="rtl"] .roadmap-phase--2 .roadmap-card::before {
+    left: auto;
+    right: 100%;
+    width: 40px;
+  }
+}
+
+@media (max-width: 420px) {
+  [dir="rtl"] .roadmap-phase {
+    padding-left: 0;
+    padding-right: 42px;
+  }
+  [dir="rtl"] .roadmap-card::before,
+  [dir="rtl"] .roadmap-phase--2 .roadmap-card::before {
+    width: 30px;
+  }
+}
+
+/* 7. Leadership & Events & Closing in RTL */
+[dir="rtl"] .leadership-copy {
+  text-align: right;
+}
+
+[dir="rtl"] .closing-eyebrow {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .leadership-facts > div + div {
+  border-left: none;
+  border-right: 1px solid #52697c;
+  padding-left: 0;
+  padding-right: 24px;
+}
+
+[dir="rtl"] .leadership-portrait > img {
+  right: auto;
+  left: 0;
+}
+
+[dir="rtl"] .leadership-attribution {
+  right: auto;
+  left: 0;
+  text-align: left;
+}
+
+[dir="rtl"] .events-intro {
+  text-align: right;
+}
+
+[dir="rtl"] .events-controls {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .events-controls > span {
+  margin-left: 0;
+  margin-right: 8px;
+}
+
+[dir="rtl"] .event-photo {
+  text-align: right;
+}
+
+[dir="rtl"] .event-caption {
+  left: 38px;
+  right: 15px;
+}
+
+[dir="rtl"] .event-arrow {
+  right: auto;
+  left: 10px;
+}
+
+[dir="rtl"] .event-arrow svg {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .closing-cta-layout > div,
+[dir="rtl"] .closing-cta-content {
+  grid-column: 1;
+  padding-left: 0;
+  padding-right: 30px;
+  text-align: right;
+}
+
+[dir="rtl"] .closing-actions {
+  justify-content: flex-start;
+}
+
+@media (max-width: 1050px) {
+  [dir="rtl"] .leadership-facts > div + div {
+    padding-left: 0;
+    padding-right: 14px;
+  }
+  [dir="rtl"] .closing-cta-layout > div,
+  [dir="rtl"] .closing-cta-content {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  [dir="rtl"] .leadership-attribution {
+    left: 0;
+    right: auto;
+  }
+  [dir="rtl"] .closing-actions {
+    justify-content: center;
+  }
+}
