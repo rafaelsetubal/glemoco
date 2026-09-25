@@ -14,22 +14,30 @@ html.rtl {
 
 html[dir="rtl"] body,
 html.rtl body {
-  overflow-x: hidden !important;
+  overflow-x: clip !important;
   max-width: 100% !important;
   width: 100% !important;
-  position: relative !important;
+  font-family: Tahoma, Arial, sans-serif;
 }
 
 html[dir="rtl"] main,
 html.rtl main,
 html[dir="rtl"] section,
-html.rtl section,
-html[dir="rtl"] .glemo-container,
-html.rtl .glemo-container {
+html.rtl section {
   max-width: 100% !important;
   box-sizing: border-box !important;
   overflow-x: clip !important;
 }
+
+/* Arabic joining and diacritics need natural tracking and a taller line box. */
+html[lang="ar"] :is(h1,h2,h3,h4,p,a,button,dt,dd,li,blockquote,span,strong,em,small) {
+  letter-spacing: normal;
+}
+html[lang="ar"] :is(h1,h2,h3,h4) { line-height: 1.4; }
+html[lang="ar"] :is(p,blockquote,dd) { line-height: 1.8; }
+html[lang="ar"] :is(.vision-h2-line,.hero-headline-line) { line-height: 1.4; padding-block: .08em; }
+html[lang="ar"] :is(.hero-headline,.vision-headline,.network-copy h2) { max-width: 100%; }
+html[lang="ar"] :is(.roadmap-number,.eco-number,.events-controls > span) { direction: ltr; unicode-bidi: isolate; }
 
 /* 2. Global Arrow and Directional Icons */
 [dir="rtl"] .arrow-up-right,
@@ -408,13 +416,35 @@ html.rtl .glemo-container {
   [dir="rtl"] .roadmap-node {
     left: auto;
     right: 12px;
+    transform: translateX(50%);
   }
   [dir="rtl"] .roadmap-card::before,
   [dir="rtl"] .roadmap-phase--2 .roadmap-card::before {
-    left: auto;
-    right: 100%;
+    left: 100%;
+    right: auto;
     width: 40px;
   }
+}
+
+@media (max-width: 820px) {
+  html[lang="ar"] .hero-headline { font-size: clamp(25px, 6.8vw, 34px); }
+  html[lang="ar"] .hero-support { font-size: 14px; }
+  html[lang="ar"] .hero-cta-group { flex-wrap: wrap; }
+  html[lang="ar"] .hero-headline-line { overflow: visible; }
+}
+@media (max-width: 800px) {
+  [dir="rtl"] .eco-heading { text-align: right; }
+  [dir="rtl"] .eco-layer li::after { left: auto; right: 66px; }
+  [dir="rtl"] .eco-layer li::before { left: auto; right: 64px; }
+  [dir="rtl"] .product-capabilities > svg { left: auto; right: 24px; }
+  [dir="rtl"] .roadmap-card li { grid-template-columns: 24px minmax(0,1fr); }
+  [dir="rtl"] .roadmap-card li svg { order: 0; }
+  [dir="rtl"] .network-evidence__index { flex-direction: row; }
+  html[lang="ar"] .product-capabilities strong { font-size: 13px; }
+  html[lang="ar"] .product-capabilities li p { font-size: 12px; }
+  html[lang="ar"] :is(.closing-eyebrow,.network-eyebrow,.roadmap-eyebrow,.product-label,.eco-label,.vision-label) { font-size: 12px; }
+  html[lang="ar"] .event-caption { right: 12px; left: 42px; }
+  html[lang="ar"] .event-caption strong { line-height: 1.5; }
 }
 
 @media (max-width: 420px) {
@@ -426,6 +456,22 @@ html.rtl .glemo-container {
   [dir="rtl"] .roadmap-phase--2 .roadmap-card::before {
     width: 30px;
   }
+}
+
+/* Preserve the stacked mobile story: RTL must not restore the desktop row. */
+@media (max-width: 960px) {
+  [dir="rtl"] .market-header-row { flex-direction: column; }
+  [dir="rtl"] .market-intro { width: 100%; min-width: 0; }
+  [dir="rtl"] .featured-market-metric { min-width: 0; max-width: 100%; }
+  html[lang="ar"] .metric-primary-value strong {
+    white-space: normal;
+    font-size: clamp(30px, 8vw, 58px);
+    line-height: 1.35;
+  }
+  html[lang="ar"] .market-headline { line-height: 1.4; }
+  html[lang="ar"] .metric-top-label { text-align: right; }
+  html[lang="ar"] .metric-col strong { line-height: 1.35; }
+  html[lang="ar"] :is(.metric-col-tag, .metric-col-layer) strong { white-space: normal; }
 }
 
 /* 12. Leadership, Events & Closing in RTL */
