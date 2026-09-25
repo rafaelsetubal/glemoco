@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export function Preloader() {
   const [progress, setProgress] = useState(0);
-  const [phase, setPhase] = useState<"loading" | "revealing" | "done">("loading");
+  const [phase, setPhase] = useState<"loading" | "dissolving" | "done">("loading");
 
   useEffect(() => {
     // Check if user prefers reduced motion
@@ -17,26 +17,26 @@ export function Preloader() {
 
     let current = 0;
     const interval = setInterval(() => {
-      current += Math.floor(Math.random() * 14) + 8;
+      current += Math.floor(Math.random() * 16) + 10;
       if (current >= 100) {
         current = 100;
         setProgress(100);
         clearInterval(interval);
 
-        // Transition to revealing phase
+        // Transition: Soft blur dissolution
         setTimeout(() => {
-          setPhase("revealing");
+          setPhase("dissolving");
           document.body.classList.add("preloader-loaded");
 
-          // Transition to complete unmount
+          // Remove when fade & blur are fully complete
           setTimeout(() => {
             setPhase("done");
-          }, 650);
-        }, 150);
+          }, 800);
+        }, 120);
       } else {
         setProgress(current);
       }
-    }, 45);
+    }, 40);
 
     return () => clearInterval(interval);
   }, []);
@@ -47,7 +47,7 @@ export function Preloader() {
 
   return (
     <aside
-      className={`preloader-overlay ${phase === "revealing" ? "preloader-exit" : ""}`}
+      className={`preloader-overlay ${phase === "dissolving" ? "preloader-dissolve" : ""}`}
       aria-label="Loading glemO"
       aria-hidden={phase !== "loading"}
     >

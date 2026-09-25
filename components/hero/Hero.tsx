@@ -51,8 +51,8 @@ export function Hero() {
 
   return (
     <section className="hero" id="top" ref={ref}>
-      {/* Cinematic High-Res Space Atmosphere Background */}
-      <div className="hero-bg-backdrop" aria-hidden="true">
+      {/* Cinematic High-Res Space Atmosphere Background with Smooth Fade */}
+      <div className="hero-bg-backdrop hero-fade-bg" aria-hidden="true">
         <img src="/hero-bg.webp" alt="" className="hero-bg-img" fetchPriority="high" />
         <div className="hero-bg-vignette" />
       </div>
@@ -66,31 +66,43 @@ export function Hero() {
       <div className="glemo-container hero-layout-grid">
         {/* Left Narrative Column */}
         <div className="hero-narrative">
-          <p className="hero-eyebrow">{t.hero.eyebrow}</p>
+          <p className="hero-eyebrow hero-fade-eyebrow">{t.hero.eyebrow}</p>
 
           <h1 className="hero-headline">
             <span className="hero-headline-desktop">
-              <span>{t.hero.headlineDesktop.line1}</span>
-              <span>{t.hero.headlineDesktop.line2}</span>
-              <span>{t.hero.headlineDesktop.line3}</span>
+              <span className="hero-line-wrap">
+                <AnimatedWords text={t.hero.headlineDesktop.line1} startIdx={0} />
+              </span>
+              <span className="hero-line-wrap">
+                <AnimatedWords text={t.hero.headlineDesktop.line2} startIdx={4} />
+              </span>
+              <span className="hero-line-wrap">
+                <AnimatedWords text={t.hero.headlineDesktop.line3} startIdx={8} />
+              </span>
             </span>
             <span className="hero-headline-mobile">
-              <span>{t.hero.headlineMobile.line1}</span>
-              <span>{t.hero.headlineMobile.line2}</span>
-              <span>{t.hero.headlineMobile.line3}</span>
+              <span className="hero-line-wrap">
+                <AnimatedWords text={t.hero.headlineMobile.line1} startIdx={0} />
+              </span>
+              <span className="hero-line-wrap">
+                <AnimatedWords text={t.hero.headlineMobile.line2} startIdx={3} />
+              </span>
+              <span className="hero-line-wrap">
+                <AnimatedWords text={t.hero.headlineMobile.line3} startIdx={6} />
+              </span>
             </span>
           </h1>
 
-          <p className="hero-support hero-support-desktop">
+          <p className="hero-support hero-support-desktop hero-fade-support">
             {t.hero.supportDesktop}
           </p>
 
-          <p className="hero-support hero-support-mobile">
+          <p className="hero-support hero-support-mobile hero-fade-support">
             {t.hero.supportMobile}
           </p>
 
           {/* Premium Architectural CTA Cluster */}
-          <div className="hero-cta-group">
+          <div className="hero-cta-group hero-fade-cta">
             <a href="#ecosystem" className="hero-cta-primary">
               <span>{t.hero.ctaPrimary}</span>
               <ArrowUpRight size={14} className="cta-arrow" />
@@ -102,7 +114,7 @@ export function Hero() {
         </div>
 
         {/* Right Visual Column (Globe + Anchored Network Metrics) */}
-        <div className="hero-visual">
+        <div className="hero-visual hero-fade-visual">
           {/* Mobile Featured Centered Logo ABOVE the Globe */}
           <div className="hero-mobile-brand" aria-hidden="true">
             <img src="/brand/glemo-official.webp" alt="GlemO" width="220" height="70" />
@@ -112,19 +124,19 @@ export function Hero() {
             <HeroGlobe />
 
             {/* Network Indicators Anchored Around Globe */}
-            <div className="hero-indicator hero-indicator-network">
+            <div className="hero-indicator hero-indicator-network hero-fade-indicator-1">
               <span className="indicator-label">{t.hero.indicators.globalNetwork}</span>
               <span className="indicator-status">
                 <i className="indicator-pulse" /> {t.hero.indicators.live}
               </span>
             </div>
 
-            <div className="hero-indicator hero-indicator-markets">
+            <div className="hero-indicator hero-indicator-markets hero-fade-indicator-2">
               <strong>{t.hero.indicators.keyMarkets}</strong>
               <span>{t.hero.indicators.keyMarketsLabel}</span>
             </div>
 
-            <div className="hero-indicator hero-indicator-connections">
+            <div className="hero-indicator hero-indicator-connections hero-fade-indicator-3">
               <strong>{t.hero.indicators.connections}</strong>
               <span>{t.hero.indicators.connectionsLabel}</span>
             </div>
@@ -132,5 +144,22 @@ export function Hero() {
         </div>
       </div>
     </section>
+  );
+}
+
+function AnimatedWords({ text, startIdx = 0 }: { text: string; startIdx?: number }) {
+  const words = text.split(" ");
+  return (
+    <>
+      {words.map((word, i) => (
+        <span
+          key={i}
+          className="hero-word-token"
+          style={{ "--word-i": startIdx + i } as React.CSSProperties}
+        >
+          {word}&nbsp;
+        </span>
+      ))}
+    </>
   );
 }

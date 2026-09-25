@@ -1,12 +1,15 @@
 /* ==========================================================================
-   GLEMO ULTRA-SLEEK INTRO PRELOADER & HERO REVEAL SYSTEM
+   GLEMO ETHEREAL PRELOADER & WORD-BY-WORD HERO REVEAL SYSTEM
    ========================================================================== */
 
+/* 1. Preloader Overlay & Blur Dissolution */
 .preloader-overlay {
   position: fixed;
   inset: 0;
   z-index: 999999;
   background: radial-gradient(circle at 50% 45%, #051624 0%, #02070c 60%, #010408 100%);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,16 +17,19 @@
   pointer-events: all;
   user-select: none;
   overflow: hidden;
-  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              backdrop-filter 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              -webkit-backdrop-filter 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, backdrop-filter, transform;
 }
 
-.preloader-overlay.preloader-exit {
-  transform: translateY(-100%) translateZ(0);
-  opacity: 0.98;
-  pointer-events: none;
+.preloader-overlay.preloader-dissolve {
+  opacity: 0 !important;
+  backdrop-filter: blur(0px) !important;
+  -webkit-backdrop-filter: blur(0px) !important;
+  transform: scale(1.025) translateZ(0);
+  pointer-events: none !important;
 }
 
 .preloader-backdrop-glow {
@@ -45,6 +51,12 @@
   flex-direction: column;
   align-items: center;
   width: min(280px, 85vw);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.preloader-overlay.preloader-dissolve .preloader-content {
+  opacity: 0;
+  transform: scale(0.96);
 }
 
 .preloader-logo-wrap {
@@ -89,7 +101,7 @@
   background: linear-gradient(90deg, #0088cc 0%, #00c8f7 70%, #8de4ff 100%);
   border-radius: 2px;
   box-shadow: 0 0 10px #00c8f7, 0 0 18px rgba(0, 200, 247, 0.8);
-  transition: width 0.06s linear;
+  transition: width 0.05s linear;
 }
 
 /* Metadata / Counter */
@@ -116,38 +128,168 @@
   letter-spacing: 0.18em;
 }
 
-/* Coordinated Hero & Navbar Initial Entrance State */
+/* 2. Coordinated Word-by-Word Hero Entrance */
+.hero-line-wrap {
+  display: block;
+  overflow: visible;
+}
+
+.hero-word-token {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(14px) translateZ(0);
+  filter: blur(4px);
+  will-change: transform, opacity, filter;
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.preloader-loaded .hero-word-token {
+  opacity: 1;
+  transform: translateY(0) translateZ(0);
+  filter: blur(0px);
+  transition-delay: calc(var(--word-i, 0) * 45ms + 120ms);
+}
+
+/* 3. Smooth Cascade Fades across Hero & Navbar Elements */
 body:not(.preloader-loaded) .nav {
   opacity: 0;
   transform: translateY(-8px) translateZ(0);
 }
 
-body:not(.preloader-loaded) .hero-layout-grid {
-  opacity: 0;
-  transform: translateY(16px) translateZ(0);
-}
-
 body.preloader-loaded .nav {
   opacity: 1;
   transform: translateY(0) translateZ(0);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.05s,
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.05s;
 }
 
-body.preloader-loaded .hero-layout-grid {
+/* Eyebrow Fade */
+.hero-fade-eyebrow {
+  opacity: 0;
+  transform: translateY(8px) translateZ(0);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.preloader-loaded .hero-fade-eyebrow {
   opacity: 1;
   transform: translateY(0) translateZ(0);
-  transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
-              transform 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+  transition-delay: 80ms;
 }
 
+/* Background Atmosphere Fade */
+.hero-fade-bg {
+  opacity: 0;
+  transform: scale(1.03) translateZ(0);
+  filter: blur(6px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.preloader-loaded .hero-fade-bg {
+  opacity: 1;
+  transform: scale(1) translateZ(0);
+  filter: blur(0px);
+  transition-delay: 100ms;
+}
+
+/* Support Text Soft Fade */
+.hero-fade-support {
+  opacity: 0;
+  transform: translateY(10px) translateZ(0);
+  filter: blur(3px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.preloader-loaded .hero-fade-support {
+  opacity: 1;
+  transform: translateY(0) translateZ(0);
+  filter: blur(0px);
+  transition-delay: 550ms;
+}
+
+/* CTA Group Soft Reveal */
+.hero-fade-cta {
+  opacity: 0;
+  transform: translateY(12px) translateZ(0);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.preloader-loaded .hero-fade-cta {
+  opacity: 1;
+  transform: translateY(0) translateZ(0);
+  transition-delay: 700ms;
+}
+
+/* Visual 3D Globe & Metrics Smooth Reveal */
+.hero-fade-visual {
+  opacity: 0;
+  transform: translateY(16px) scale(0.98) translateZ(0);
+  filter: blur(8px);
+  transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.preloader-loaded .hero-fade-visual {
+  opacity: 1;
+  transform: translateY(0) scale(1) translateZ(0);
+  filter: blur(0px);
+  transition-delay: 250ms;
+}
+
+/* Staggered Floating Indicators Around Globe */
+.hero-fade-indicator-1,
+.hero-fade-indicator-2,
+.hero-fade-indicator-3 {
+  opacity: 0;
+  transform: translateY(12px) scale(0.95) translateZ(0);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.preloader-loaded .hero-fade-indicator-1 {
+  opacity: 1;
+  transform: translateY(0) scale(1) translateZ(0);
+  transition-delay: 750ms;
+}
+
+body.preloader-loaded .hero-fade-indicator-2 {
+  opacity: 1;
+  transform: translateY(0) scale(1) translateZ(0);
+  transition-delay: 880ms;
+}
+
+body.preloader-loaded .hero-fade-indicator-3 {
+  opacity: 1;
+  transform: translateY(0) scale(1) translateZ(0);
+  transition-delay: 1000ms;
+}
+
+/* 4. Accessibility & Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .preloader-overlay {
     display: none !important;
   }
-  body:not(.preloader-loaded) .nav,
-  body:not(.preloader-loaded) .hero-layout-grid {
+  .hero-word-token,
+  .hero-fade-eyebrow,
+  .hero-fade-bg,
+  .hero-fade-support,
+  .hero-fade-cta,
+  .hero-fade-visual,
+  .hero-fade-indicator-1,
+  .hero-fade-indicator-2,
+  .hero-fade-indicator-3,
+  .nav {
     opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
+    transition: none !important;
   }
 }
