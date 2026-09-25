@@ -19,6 +19,7 @@ import "./marketplace.css";
 import "./network.css";
 import "./roadmap.css";
 import "./closing.css";
+import "./motion-smooth.css";
 import { I18nProvider } from "@/lib/i18n/context";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });

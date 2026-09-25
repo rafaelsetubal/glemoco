@@ -1,0 +1,191 @@
+/* ==========================================================================
+   GLEMO HIGH-PERFORMANCE SMOOTH MOTION & VISUAL IMPACT SYSTEM
+   GPU-Accelerated (Compositor Thread) • 60-120 FPS • Zero Layout Reflow
+   ========================================================================== */
+
+/* 1. Global Smooth Scroll & Hardware Acceleration Baseline */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2. Micro Pulse for Live Status Indicators */
+@keyframes radar-pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 200, 247, 0.6);
+  }
+  70% {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 8px rgba(0, 200, 247, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 200, 247, 0);
+  }
+}
+
+.indicator-live,
+.mp-category i,
+.market-label-tick,
+.eco-spine-node {
+  animation: radar-pulse 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* 3. Button Luminous Sheen & Magnetic Lift */
+.closing-button,
+.hero-cta-primary,
+.closing-button--primary {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s ease,
+              border-color 0.3s ease !important;
+  will-change: transform, box-shadow;
+}
+
+.closing-button:hover,
+.hero-cta-primary:hover,
+.closing-button--primary:hover {
+  transform: translateY(-2px) translateZ(0);
+  box-shadow: 0 8px 24px -4px rgba(0, 186, 255, 0.35);
+}
+
+.closing-button::after,
+.hero-cta-primary::after,
+.closing-button--primary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.16) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.closing-button:hover::after,
+.hero-cta-primary:hover::after,
+.closing-button--primary:hover::after {
+  left: 160%;
+}
+
+/* 4. Glass Card Smooth Hover Elevations & Ambient Glow */
+.mp-card,
+.roadmap-card,
+.network-evidence,
+.featured-market-metric,
+.leadership-facts > div,
+.event-photo {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s ease !important;
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
+}
+
+.mp-card:hover {
+  transform: translateY(-4px) translateZ(0) !important;
+  border-color: rgba(0, 200, 247, 0.45) !important;
+  box-shadow: 0 16px 36px -12px rgba(0, 200, 247, 0.16),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+.roadmap-card:hover {
+  transform: translateY(-4px) translateZ(0) !important;
+  border-color: rgba(0, 200, 247, 0.4) !important;
+  box-shadow: 0 14px 32px -10px rgba(0, 186, 255, 0.18),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.network-evidence:hover {
+  transform: translateY(-4px) translateZ(0) !important;
+  border-color: rgba(0, 200, 247, 0.35) !important;
+  box-shadow: 0 16px 36px -10px rgba(0, 200, 247, 0.15) !important;
+}
+
+.featured-market-metric:hover {
+  transform: translateY(-3px) translateZ(0) !important;
+  box-shadow: 0 20px 48px -12px rgba(0, 200, 247, 0.22) !important;
+}
+
+.leadership-facts > div:hover {
+  transform: translateY(-3px) translateZ(0) !important;
+  border-color: rgba(0, 200, 247, 0.35) !important;
+  box-shadow: 0 10px 24px -6px rgba(0, 200, 247, 0.12) !important;
+}
+
+.event-photo:hover {
+  transform: translateY(-4px) scale(1.01) translateZ(0) !important;
+  box-shadow: 0 18px 40px -12px rgba(0, 186, 255, 0.22) !important;
+}
+
+/* 5. Subtle Floating Ambient Animation for Indicators */
+@keyframes ambient-float {
+  0%, 100% {
+    transform: translateY(0) translateZ(0);
+  }
+  50% {
+    transform: translateY(-5px) translateZ(0);
+  }
+}
+
+.hero-indicator-card {
+  animation: ambient-float 5s ease-in-out infinite;
+}
+
+/* 6. Filter Chips Elastic Ripple Transition */
+.mp-filters button {
+  position: relative;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transform: translateZ(0);
+}
+
+.mp-filters button:hover {
+  transform: translateY(-2px) translateZ(0);
+  border-color: #00c9f7 !important;
+  box-shadow: 0 4px 14px -2px rgba(0, 201, 247, 0.2);
+}
+
+.mp-filters button[aria-pressed="true"] {
+  box-shadow: 0 0 16px rgba(0, 186, 255, 0.28), inset 0 0 12px rgba(0, 186, 255, 0.18) !important;
+}
+
+/* 7. Section Titles Glowing Shimmer Gradient on Hover/Focus */
+.mp-heading h2 span,
+.eco-heading h2 span,
+.product-copy h2 span,
+.roadmap-heading h2 span {
+  transition: filter 0.4s ease, text-shadow 0.4s ease;
+  display: inline-block;
+}
+
+.mp-heading:hover h2 span,
+.eco-heading:hover h2 span,
+.product-copy:hover h2 span,
+.roadmap-heading:hover h2 span {
+  text-shadow: 0 0 20px rgba(0, 200, 247, 0.5);
+  filter: brightness(1.1);
+}
+
+/* 8. Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
