@@ -63,7 +63,7 @@ const social = [
   { label: "Spotify podcast", icon: SpotifyIcon, href: "https://open.spotify.com/show/66MsHnQI7EVqOgy9TrrgT7" },
   { label: "WhatsApp", icon: WhatsAppIcon, href: "https://api.whatsapp.com/send?phone=5531996390738" },
 ];
-const contact = "https://api.whatsapp.com/send?phone=5531996390738";
+const contact = "mailto:gleisson@glemo.co";
 
 export function ClosingSections() {
   const { t } = useI18n();
@@ -166,20 +166,23 @@ export function ClosingSections() {
     </section>
 
     <section className="closing-cta" id="contact" aria-labelledby="closing-title">
-      <div className="glemo-container closing-cta-layout"><div>
-        <h2 id="closing-title">
-          {t.closing.cta.titleMain}<br />
-          <em>{t.closing.cta.titleHighlight}</em>
-        </h2>
-        <div className="closing-actions">
-          <a className="closing-button closing-button--primary" href="#ecosystem">
-            {t.closing.cta.buttonPrimary} <ArrowUpRight size={16} />
-          </a>
-          <a className="closing-button" href={contact} target="_blank" rel="noopener noreferrer">
-            {t.closing.cta.buttonSecondary} <ArrowUpRight size={16} />
-          </a>
+      <div className="closing-cta-globe" aria-hidden="true">
+        <img src="/closing/globe.webp" alt="" className="closing-cta-globe-img" />
+        <div className="closing-cta-globe-glow" />
+      </div>
+      <div className="glemo-container closing-cta-layout">
+        <div className="closing-cta-content">
+          <h2 id="closing-title">
+            {t.closing.cta.titleMain}<br />
+            <em>{t.closing.cta.titleHighlight}</em>
+          </h2>
+          <div className="closing-actions">
+            <a className="closing-button closing-button--primary closing-button--cta-talk" href={contact}>
+              {t.closing.cta.buttonSecondary} <ArrowUpRight size={16} />
+            </a>
+          </div>
         </div>
-      </div></div>
+      </div>
     </section>
 
     <footer className="closing-footer"><div className="glemo-container closing-footer-layout">
@@ -188,7 +191,7 @@ export function ClosingSections() {
         <a href="#ecosystem">{t.nav.ecosystem}</a>
         <a href="#marketplace">{t.nav.marketplace}</a>
         <a href="#roadmap">{t.nav.roadmap}</a>
-        <a href="#contact">{t.nav.contact}</a>
+        <a href={contact}>{t.nav.contact}</a>
       </nav>
       <div className="closing-socials">{social.map(({ label, icon: Icon, href }) => <a href={href} key={label} aria-label={label} title={label} target="_blank" rel="noopener noreferrer"><Icon /></a>)}<a href="https://www.glemo.com.br/" aria-label="glemO portal" title="glemO portal" target="_blank" rel="noopener noreferrer"><Globe2 size={18} /></a></div>
       <p className="closing-copyright">© {new Date().getFullYear()} {t.closing.footer.copyright}</p>

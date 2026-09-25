@@ -55,7 +55,7 @@ export function Navbar() {
               {item.label}
             </a>
           ))}
-          <a className="contact" href="#contact">
+          <a className="contact" href="mailto:gleisson@glemo.co">
             {t.nav.contact} <ArrowUpRight size={14} />
           </a>
           <LanguageSelector />
@@ -74,7 +74,7 @@ export function Navbar() {
               {item.label}
             </a>
           ))}
-          <a href="#contact" onClick={() => setOpen(false)}>
+          <a href="mailto:gleisson@glemo.co" onClick={() => setOpen(false)}>
             {t.nav.contact} <ArrowUpRight />
           </a>
           <LanguageSelector isMobile />

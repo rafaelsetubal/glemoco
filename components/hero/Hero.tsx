@@ -95,7 +95,7 @@ export function Hero() {
               <span>{t.hero.ctaPrimary}</span>
               <ArrowUpRight size={14} className="cta-arrow" />
             </a>
-            <a href="#contact" className="hero-cta-secondary">
+            <a href="mailto:gleisson@glemo.co" className="hero-cta-secondary">
               {t.hero.ctaSecondary}
             </a>
           </div>
