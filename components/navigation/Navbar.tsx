@@ -64,8 +64,8 @@ export function Navbar() {
       {open && (
         <div className="mobile-overlay" role="dialog" aria-modal="true" aria-label="Mobile navigation">
           <div className="mobile-overlay-header">
-            <a href="#top" className="brand" onClick={() => setOpen(false)} aria-label="GlemO home">
-              <img src="/brand/glemo-official.webp" alt="GlemO" width="128" height="40" />
+            <a href="#top" className="mobile-brand" onClick={() => setOpen(false)} aria-label="GlemO home">
+              <img src="/brand/glemo-official.webp" alt="GlemO" width="132" height="42" />
             </a>
             <button className="mobile-close-btn" onClick={() => setOpen(false)} aria-label="Close navigation">
               <X size={22} />

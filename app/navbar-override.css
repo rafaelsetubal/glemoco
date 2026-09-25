@@ -153,6 +153,26 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.mobile-brand,
+.mobile-overlay .brand {
+  display: flex !important;
+  align-items: center !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  pointer-events: auto !important;
+  text-decoration: none;
+}
+
+.mobile-brand img,
+.mobile-overlay .brand img {
+  width: 132px !important;
+  height: auto !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
 .mobile-close-btn {
   display: flex;
   align-items: center;
