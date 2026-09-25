@@ -282,6 +282,7 @@ export const ar: Dictionary = {
       titleHighlight: "حاضرون حيثما يتحرك السوق.",
       description:
         "نتواصل مع الرواد الذين يرسمون ملامح العقارات والتكنولوجيا والابتكار. استكشف الفعاليات التي تشارك فيها glemO رؤيتها وتبني شراكاتها.",
+      morePhotos: "عرض الصور",
       items: [
         { title: "المؤتمر العالمي للبلوك تشين", detail: "لندن، المملكة المتحدة · Agora GBC" },
         { title: "منصة Startup Showcase من Google", detail: "2026 · Web Summit ريو" },

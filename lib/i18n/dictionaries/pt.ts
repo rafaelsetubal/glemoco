@@ -288,6 +288,7 @@ export const pt: Dictionary = {
       titleHighlight: "Presente onde o mercado acontece.",
       description:
         "Conectando-se com quem molda o futuro do mercado imobiliário, da tecnologia e da inovação. Conheça os eventos onde o glemO compartilha ideias e constrói relacionamentos.",
+      morePhotos: "Ver fotos",
       items: [
         { title: "Global Blockchain Congress", detail: "Londres, Reino Unido · Agora GBC" },
         { title: "Startup Showcase Google for Startups", detail: "2026 · Web Summit Rio" },

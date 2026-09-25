@@ -289,6 +289,7 @@ export const fr: Dictionary = {
       titleHighlight: "Présent là où le marché avance.",
       description:
         "Au contact des acteurs qui façonnent l'immobilier, la technologie et l'innovation. Découvrez les événements où glemO partage sa vision et tisse des liens solides.",
+      morePhotos: "Voir les photos",
       items: [
         { title: "Global Blockchain Congress", detail: "Londres, Royaume-Uni · Agora GBC" },
         { title: "Startup Showcase Google for Startups", detail: "2026 · Web Summit Rio" },

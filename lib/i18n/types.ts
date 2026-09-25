@@ -238,6 +238,7 @@ export interface Dictionary {
       titleMain: string;
       titleHighlight: string;
       description: string;
+      morePhotos?: string;
       items: {
         title: string;
         detail: string;

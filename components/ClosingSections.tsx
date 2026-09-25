@@ -147,9 +147,22 @@ export function ClosingSections() {
           {Array.from({ length: 5 }, (_, offset) => {
             const index = (start + offset) % eventItems.length;
             const event = eventItems[index];
-            return <button className={`event-photo ${offset === 0 ? "event-photo--featured" : ""}`} key={index} onClick={() => openPhoto(index)} aria-label={`View photo: ${event.title}, ${event.detail}`}>
+            const isLast = offset === 4 && eventItems.length > 5;
+            const remaining = eventItems.length - 4;
+
+            return <button className={`event-photo ${offset === 0 ? "event-photo--featured" : ""} ${isLast ? "event-photo--more" : ""}`} key={index} onClick={() => openPhoto(index)} aria-label={`View photo: ${event.title}, ${event.detail}`}>
               <img src={`/events/${event.image}`} alt={event.title} loading="lazy" />
-              <span className="event-caption"><strong>{event.title}</strong><small>{event.detail}</small></span><span className="event-arrow"><ArrowUpRight size={17} /></span>
+              {isLast ? (
+                <div className="event-more-overlay">
+                  <span className="event-more-count">+{remaining}</span>
+                  <span className="event-more-label">{(t.closing.events as unknown as { morePhotos?: string }).morePhotos || "Ver fotos"}</span>
+                </div>
+              ) : (
+                <>
+                  <span className="event-caption"><strong>{event.title}</strong><small>{event.detail}</small></span>
+                  <span className="event-arrow"><ArrowUpRight size={17} /></span>
+                </>
+              )}
             </button>;
           })}
         </div>
