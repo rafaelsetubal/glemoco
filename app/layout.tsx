@@ -20,7 +20,9 @@ import "./network.css";
 import "./roadmap.css";
 import "./closing.css";
 import "./motion-smooth.css";
+import "./preloader.css";
 import { I18nProvider } from "@/lib/i18n/context";
+import { Preloader } from "@/components/Preloader";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -44,6 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
+        <Preloader />
         <I18nProvider>{children}</I18nProvider>
       </body>
     </html>
