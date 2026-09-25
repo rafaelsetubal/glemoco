@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useI18n } from "@/lib/i18n/context";
 
 export function VisionSection() {
+  const { t } = useI18n();
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -47,27 +49,21 @@ export function VisionSection() {
       <div className="glemo-container vision-grid">
         {/* Left Narrative Column */}
         <div className="vision-copy">
-          <p className="vision-label">02 — OUR VISION</p>
+          <p className="vision-label">{t.vision.label}</p>
           <h2 className="vision-headline">
-            <span className="vision-h2-line">Real estate is global.</span>
-            <span className="vision-h2-line">Its infrastructure should be too.</span>
+            <span className="vision-h2-line">{t.vision.headlineLine1}</span>
+            <span className="vision-h2-line">{t.vision.headlineLine2}</span>
           </h2>
           <div className="vision-statement">
-            <p>
-              Real estate is the world’s largest financial asset, yet technological adoption remains slow and fragmented.
-            </p>
-            <p>
-              Cross-border transactions are still complex, limiting access to global opportunities.
-            </p>
+            <p>{t.vision.statementP1}</p>
+            <p>{t.vision.statementP2}</p>
           </div>
 
           <blockquote className="vision-quote">
-            <p>
-              “We are not building another real estate platform. We are connecting the infrastructure of a global market.”
-            </p>
+            <p>{t.vision.quote}</p>
             <footer className="vision-author">
-              <strong>GLEISSON OLIVEIRA HERIT</strong>
-              <span>THE CREATOR OF OPEN AND THE GLEMO PROJECT</span>
+              <strong>{t.vision.authorName}</strong>
+              <span>{t.vision.authorRole}</span>
             </footer>
           </blockquote>
         </div>

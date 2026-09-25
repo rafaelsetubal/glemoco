@@ -1,32 +1,19 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Users, Cpu, Globe2, Network, Layers, Coins, ChartNoAxesCombined, Building2, Trophy } from "lucide-react";
+import { Users, Cpu, Globe2, Network, Layers, Coins, ChartNoAxesCombined, Building2, Trophy, LucideIcon } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useI18n } from "@/lib/i18n/context";
 
-const phases = [
-  { year: "2026", items: [
-    { icon: Users, text: "Partner growth (+2x)" },
-    { icon: Cpu, text: "AI Marketplace" },
-    { icon: Globe2, text: "US market immersion" },
-    { icon: Network, text: "Web3 community" },
-  ] },
-  { year: "2027", items: [
-    { icon: Layers, text: "AI integrations, AI apps" },
-    { icon: Users, text: "Over 10,000 partners" },
-    { icon: Coins, text: "gO Token launch" },
-    { icon: ChartNoAxesCombined, text: "Launch of the RWA platform." },
-  ] },
-  { year: "2028", items: [
-    { icon: Building2, text: "Top of Mind for new real estate in Brazil" },
-    { icon: Globe2, text: "Top of Mind for cross-border transactions of new real estate" },
-    { icon: Trophy, text: "RWA platform leadership" },
-  ] },
-];
+const phase1Icons: LucideIcon[] = [Users, Cpu, Globe2, Network];
+const phase2Icons: LucideIcon[] = [Layers, Users, Coins, ChartNoAxesCombined];
+const phase3Icons: LucideIcon[] = [Building2, Globe2, Trophy];
 
 export function RoadmapSection() {
+  const { t } = useI18n();
   const root = useRef<HTMLElement>(null);
+
   useEffect(() => {
     if (!root.current || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.registerPlugin(ScrollTrigger);
@@ -39,17 +26,32 @@ export function RoadmapSection() {
     return () => context.revert();
   }, []);
 
+  const roadmapPhases = [
+    {
+      year: t.roadmap.phases.phase1.year,
+      items: t.roadmap.phases.phase1.items.map((text, i) => ({ icon: phase1Icons[i], text })),
+    },
+    {
+      year: t.roadmap.phases.phase2.year,
+      items: t.roadmap.phases.phase2.items.map((text, i) => ({ icon: phase2Icons[i], text })),
+    },
+    {
+      year: t.roadmap.phases.phase3.year,
+      items: t.roadmap.phases.phase3.items.map((text, i) => ({ icon: phase3Icons[i], text })),
+    },
+  ];
+
   return <section id="roadmap" className="roadmap-section" ref={root} aria-labelledby="roadmap-title">
     <div className="glemo-container">
       <div className="roadmap-layout">
         <header className="roadmap-heading">
-          <p className="roadmap-eyebrow">09 — ROADMAP <span /></p>
-          <h2 id="roadmap-title">36-month<br /><span>roadmap</span></h2>
-          <p className="roadmap-subtitle">From today to a more<br />open real estate world.</p>
+          <p className="roadmap-eyebrow">{t.roadmap.eyebrow} <span /></p>
+          <h2 id="roadmap-title">{t.roadmap.titleMain}<br /><span>{t.roadmap.titleHighlight}</span></h2>
+          <p className="roadmap-subtitle" dangerouslySetInnerHTML={{ __html: t.roadmap.subtitle.replace('\n', '<br />') }} />
         </header>
         <div className="roadmap-spine" aria-hidden="true"><span className="roadmap-spine-progress" /></div>
         <ol className="roadmap-phases">
-          {phases.map((phase, index) => <li className={`roadmap-phase roadmap-phase--${index + 1}`} key={phase.year}>
+          {roadmapPhases.map((phase, index) => <li className={`roadmap-phase roadmap-phase--${index + 1}`} key={phase.year}>
             <span className="roadmap-node" aria-hidden="true" />
             <article className="roadmap-card">
               <header><h3>{phase.year}</h3><span className="roadmap-number">0{index + 1}</span></header>

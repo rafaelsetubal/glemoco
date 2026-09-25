@@ -3,15 +3,18 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useI18n } from "@/lib/i18n/context";
 
-const milestones = [
-  { number: "01", video: "/network/network-03.mp4", copy: "Over 80 active partners, including in the United States, Brazil and Dubai." },
-  { number: "02", video: "/network/network-02.mp4", copy: "Thousands of brokered sales." },
-  { number: "03", video: "/network/network-01.mp4", copy: "Major Brazilian developers as clients: MRV, BRZ, Rogga, Cyrella." },
+const milestoneVideos = [
+  "/network/network-03.mp4",
+  "/network/network-02.mp4",
+  "/network/network-01.mp4",
 ];
 
 export function NetworkSection() {
+  const { t } = useI18n();
   const sectionRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
@@ -46,17 +49,27 @@ export function NetworkSection() {
     return () => { cleanup(); context.revert(); };
   }, []);
 
+  const milestoneItems = [
+    { number: "01", video: milestoneVideos[0], copy: t.network.milestones[0] },
+    { number: "02", video: milestoneVideos[1], copy: t.network.milestones[1] },
+    { number: "03", video: milestoneVideos[2], copy: t.network.milestones[2] },
+  ];
+
   return <section className="network-section" id="network" ref={sectionRef}>
     <div className="network-section__backdrop" aria-hidden="true" />
     <div className="glemo-container network-layout">
       <aside className="network-copy">
-        <p className="network-eyebrow"><span /> 08 — GLOBAL NETWORK</p>
-        <h2>glemO has <em>already begun.</em></h2>
-        <p className="network-intro">With an active partner network generating sales, the marketplace offers proprietary AI apps and the RWA platform will help build rails between tokenized assets and liquidity.</p>
-        <p className="network-signature">REAL ASSETS<br />GLOBAL MARKETS<br />A MORE LIQUID TOMORROW</p>
+        <p className="network-eyebrow"><span /> {t.network.eyebrow}</p>
+        <h2>{t.network.titleMain} <em>{t.network.titleHighlight}</em></h2>
+        <p className="network-intro">{t.network.intro}</p>
+        <p className="network-signature">
+          {t.network.signature.line1}<br />
+          {t.network.signature.line2}<br />
+          {t.network.signature.line3}
+        </p>
       </aside>
       <div className="network-rail" aria-label="Network milestones">
-        {milestones.map((milestone) => <article className="network-evidence" key={milestone.number}>
+        {milestoneItems.map((milestone) => <article className="network-evidence" key={milestone.number}>
           <div className="network-evidence__index"><span>{milestone.number}</span><i /></div>
           <div className="network-evidence__visual"><video muted loop playsInline preload="auto" src={milestone.video} aria-label={milestone.copy} /></div>
           <p>{milestone.copy}</p>

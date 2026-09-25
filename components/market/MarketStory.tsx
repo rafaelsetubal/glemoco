@@ -2,8 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { FeaturedMarketMetric } from "./FeaturedMarketMetric";
+import { useI18n } from "@/lib/i18n/context";
 
 export function MarketStory() {
+  const { t } = useI18n();
   const ref = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -54,22 +56,26 @@ export function MarketStory() {
           <div className="market-intro">
             <p className="market-label">
               <span className="market-label-tick" aria-hidden="true" />
-              03 — MARKET DATA
+              {t.market.label}
             </p>
             <h2 className="market-headline">
-              A US$290T market,
+              {t.market.headlineLine1}
               <br />
-              still largely disconnected.
+              {t.market.headlineLine2}
             </h2>
             <p className="market-desc">
-              Real estate is the world’s largest asset class — with over USD 700 billion
+              {t.market.descLine1}
               <br />
-              in global transaction volume, yet technological adoption remains fragmented.
+              {t.market.descLine2}
             </p>
           </div>
 
           {/* Featured Translucent Glass Data Panel */}
-          <FeaturedMarketMetric />
+          <FeaturedMarketMetric
+            topLabel={t.market.featuredTop}
+            value={t.market.featuredValue}
+            bottomLabel={t.market.featuredBottom}
+          />
         </div>
 
         {/* 3. Tightly Grouped 5-Column Evidence Strip directly below */}
@@ -77,50 +83,40 @@ export function MarketStory() {
           <div className="metric-col metric-cyan">
             <div className="metric-col-tick" aria-hidden="true" />
             <div className="metric-col-content">
-              <strong>20%</strong>
-              <span>
-                CROSS-BORDER<br />MARKET SHARE
-              </span>
+              <strong>{t.market.metrics.shareValue}</strong>
+              <span dangerouslySetInnerHTML={{ __html: t.market.metrics.shareLabel.replace('\n', '<br />') }} />
             </div>
           </div>
 
           <div className="metric-col metric-orange">
             <div className="metric-col-tick" aria-hidden="true" />
             <div className="metric-col-content">
-              <strong>9MM+</strong>
-              <span>
-                GLOBAL COMPANIES<br />TARGET MARKET
-              </span>
+              <strong>{t.market.metrics.companiesValue}</strong>
+              <span dangerouslySetInnerHTML={{ __html: t.market.metrics.companiesLabel.replace('\n', '<br />') }} />
             </div>
           </div>
 
           <div className="metric-col metric-white">
             <div className="metric-col-tick" aria-hidden="true" />
             <div className="metric-col-content">
-              <strong>25%</strong>
-              <span>
-                US ENTERPRISES<br />TECH ADOPTION
-              </span>
+              <strong>{t.market.metrics.adoptionValue}</strong>
+              <span dangerouslySetInnerHTML={{ __html: t.market.metrics.adoptionLabel.replace('\n', '<br />') }} />
             </div>
           </div>
 
           <div className="metric-col metric-cyan metric-col-tag">
             <div className="metric-col-tick" aria-hidden="true" />
             <div className="metric-col-content">
-              <strong>USA &amp; DUBAI</strong>
-              <span>
-                STRONGEST RWA<br />&amp; CRYPTO HUBS
-              </span>
+              <strong>{t.market.metrics.hubsValue}</strong>
+              <span dangerouslySetInnerHTML={{ __html: t.market.metrics.hubsLabel.replace('\n', '<br />') }} />
             </div>
           </div>
 
           <div className="metric-col metric-white metric-col-layer">
             <div className="metric-col-tick" aria-hidden="true" />
             <div className="metric-col-content">
-              <strong>MASSIVE AI</strong>
-              <span>
-                AI &amp; WEB3<br />ADOPTION LAYER
-              </span>
+              <strong>{t.market.metrics.aiValue}</strong>
+              <span dangerouslySetInnerHTML={{ __html: t.market.metrics.aiLabel.replace('\n', '<br />') }} />
             </div>
           </div>
         </div>

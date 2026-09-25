@@ -2,15 +2,23 @@
 
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-
-const links = ["About", "Ecosystem", "Marketplace", "Roadmap", "Events"];
-const sectionHref = (link: string) => link === "About" ? "#leadership" : link === "Events" ? "#events" : link === "Roadmap" ? "#roadmap" : link === "Marketplace" ? "#marketplace" : link === "Ecosystem" ? "#ecosystem" : "#";
+import { useI18n } from "@/lib/i18n/context";
+import { LanguageSelector } from "./LanguageSelector";
 
 export function Navbar() {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const lastY = useRef(0);
+
+  const navItems = [
+    { label: t.nav.about, href: "#leadership" },
+    { label: t.nav.ecosystem, href: "#ecosystem" },
+    { label: t.nav.marketplace, href: "#marketplace" },
+    { label: t.nav.roadmap, href: "#roadmap" },
+    { label: t.nav.events, href: "#events" },
+  ];
 
   useEffect(() => {
     const update = () => {
@@ -29,15 +37,49 @@ export function Navbar() {
     update();
     addEventListener("scroll", update, { passive: true });
     addEventListener("wheel", wheel, { passive: true });
-    return () => { removeEventListener("scroll", update); removeEventListener("wheel", wheel); };
+    return () => {
+      removeEventListener("scroll", update);
+      removeEventListener("wheel", wheel);
+    };
   }, []);
 
-  return <header className={`nav ${scrolled ? "nav-scrolled" : ""} ${hidden && !open ? "nav-hidden" : ""}`}>
-    <div className="glemo-container nav-inner">
-      <a href="#top" className="brand" aria-label="GlemO home"><img src="/brand/glemo-official.webp" alt="GlemO" width="142" height="45" /></a>
-      <nav>{links.map(link => <a href={sectionHref(link)} key={link}>{link}</a>)}<a className="contact" href="#contact">Contact <ArrowUpRight size={14} /></a></nav>
-      <button className="menu" onClick={() => setOpen(!open)} aria-label={open ? "Close navigation" : "Open navigation"}>{open ? <X /> : <Menu />}</button>
-    </div>
-    {open && <div className="mobile-overlay"><button onClick={() => setOpen(false)} aria-label="Close navigation"><X /></button>{links.map(link => <a href={sectionHref(link)} key={link} onClick={() => setOpen(false)}>{link}</a>)}<a href="#contact">Contact <ArrowUpRight /></a></div>}
-  </header>;
+  return (
+    <header className={`nav ${scrolled ? "nav-scrolled" : ""} ${hidden && !open ? "nav-hidden" : ""}`}>
+      <div className="glemo-container nav-inner">
+        <a href="#top" className="brand" aria-label="GlemO home">
+          <img src="/brand/glemo-official.webp" alt="GlemO" width="142" height="45" />
+        </a>
+        <nav>
+          {navItems.map((item) => (
+            <a href={item.href} key={item.href}>
+              {item.label}
+            </a>
+          ))}
+          <a className="contact" href="#contact">
+            {t.nav.contact} <ArrowUpRight size={14} />
+          </a>
+          <LanguageSelector />
+        </nav>
+        <button className="menu" onClick={() => setOpen(!open)} aria-label={open ? "Close navigation" : "Open navigation"}>
+          {open ? <X /> : <Menu />}
+        </button>
+      </div>
+      {open && (
+        <div className="mobile-overlay">
+          <button onClick={() => setOpen(false)} aria-label="Close navigation">
+            <X />
+          </button>
+          {navItems.map((item) => (
+            <a href={item.href} key={item.href} onClick={() => setOpen(false)}>
+              {item.label}
+            </a>
+          ))}
+          <a href="#contact" onClick={() => setOpen(false)}>
+            {t.nav.contact} <ArrowUpRight />
+          </a>
+          <LanguageSelector isMobile />
+        </div>
+      )}
+    </header>
+  );
 }

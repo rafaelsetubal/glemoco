@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import { ArrowUpRight } from "lucide-react";
 import { BackgroundParticles } from "./BackgroundParticles";
+import { useI18n } from "@/lib/i18n/context";
 
 const HeroGlobe = dynamic(
   () => import("./HeroGlobe").then((mod) => mod.HeroGlobe),
@@ -14,6 +15,7 @@ const HeroGlobe = dynamic(
 );
 
 export function Hero() {
+  const { t } = useI18n();
   const ref = useRef<HTMLElement>(null);
   const atmosphereRef = useRef<HTMLDivElement>(null);
 
@@ -64,37 +66,37 @@ export function Hero() {
       <div className="glemo-container hero-layout-grid">
         {/* Left Narrative Column */}
         <div className="hero-narrative">
-          <p className="hero-eyebrow">GLOBAL REAL ESTATE ECOSYSTEM</p>
+          <p className="hero-eyebrow">{t.hero.eyebrow}</p>
 
           <h1 className="hero-headline">
             <span className="hero-headline-desktop">
-              <span>Global real estate,</span>
-              <span>powered by Web2,</span>
-              <span>Web3 &amp; AI.</span>
+              <span>{t.hero.headlineDesktop.line1}</span>
+              <span>{t.hero.headlineDesktop.line2}</span>
+              <span>{t.hero.headlineDesktop.line3}</span>
             </span>
             <span className="hero-headline-mobile">
-              <span>Global real estate,</span>
-              <span>powered by</span>
-              <span>Web2, Web3 &amp; AI.</span>
+              <span>{t.hero.headlineMobile.line1}</span>
+              <span>{t.hero.headlineMobile.line2}</span>
+              <span>{t.hero.headlineMobile.line3}</span>
             </span>
           </h1>
 
           <p className="hero-support hero-support-desktop">
-            Properties, people, data and opportunities in one ecosystem.
+            {t.hero.supportDesktop}
           </p>
 
           <p className="hero-support hero-support-mobile">
-            Properties, data and opportunities in one ecosystem.
+            {t.hero.supportMobile}
           </p>
 
           {/* Premium Architectural CTA Cluster */}
           <div className="hero-cta-group">
             <a href="#ecosystem" className="hero-cta-primary">
-              <span>Explore ecosystem</span>
+              <span>{t.hero.ctaPrimary}</span>
               <ArrowUpRight size={14} className="cta-arrow" />
             </a>
             <a href="#contact" className="hero-cta-secondary">
-              Contact us
+              {t.hero.ctaSecondary}
             </a>
           </div>
         </div>
@@ -111,20 +113,20 @@ export function Hero() {
 
             {/* Network Indicators Anchored Around Globe */}
             <div className="hero-indicator hero-indicator-network">
-              <span className="indicator-label">GLOBAL NETWORK</span>
+              <span className="indicator-label">{t.hero.indicators.globalNetwork}</span>
               <span className="indicator-status">
-                <i className="indicator-pulse" /> LIVE
+                <i className="indicator-pulse" /> {t.hero.indicators.live}
               </span>
             </div>
 
             <div className="hero-indicator hero-indicator-markets">
-              <strong>06</strong>
-              <span>KEY MARKETS</span>
+              <strong>{t.hero.indicators.keyMarkets}</strong>
+              <span>{t.hero.indicators.keyMarketsLabel}</span>
             </div>
 
             <div className="hero-indicator hero-indicator-connections">
-              <strong>120+</strong>
-              <span>CONNECTIONS</span>
+              <strong>{t.hero.indicators.connections}</strong>
+              <span>{t.hero.indicators.connectionsLabel}</span>
             </div>
           </div>
         </div>

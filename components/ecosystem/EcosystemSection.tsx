@@ -3,7 +3,8 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Search, UserRound, ChartNoAxesColumnIncreasing, Database, LayoutGrid, Blocks } from "lucide-react";
+import { Search, UserRound, ChartNoAxesColumnIncreasing, Database, LayoutGrid, Blocks, LucideIcon } from "lucide-react";
+import { useI18n } from "@/lib/i18n/context";
 
 const connections = [
   "M265 140 H335 C390 140 370 230 460 230",
@@ -14,18 +15,14 @@ const connections = [
   "M935 420 H870 C810 420 825 330 740 330",
 ];
 
-const transaction = [
-  { number: "01", title: "Discover", copy: "Buyers enter the marketplace to search for properties.", icon: Search },
-  { number: "02", title: "Qualify", copy: "Qualified demand is routed to the partner responsible for the sale.", icon: UserRound },
-  { number: "03", title: "Convert", copy: "Completed transactions generate glemO’s marketplace revenue.", icon: ChartNoAxesColumnIncreasing },
-];
-const infrastructure = [
-  { number: "04", title: "Govern", copy: "The marketplace introduces governance through a gO token.", icon: Database },
-  { number: "05", title: "Access", copy: "Partners access applications and tools across the ecosystem.", icon: LayoutGrid },
-  { number: "06", title: "Tokenize", copy: "The RWA layer expands incentives through the gO token.", icon: Blocks },
-];
+interface StepItem {
+  number: string;
+  title: string;
+  copy: string;
+  icon: LucideIcon;
+}
 
-function Layer({ items, web, name }: { items: typeof transaction; web: string; name: string }) {
+function Layer({ items, web, name }: { items: StepItem[]; web: string; name: string }) {
   return <div className={`eco-layer eco-${web.toLowerCase()}`}>
     <h3><span>{web}</span> {name}</h3>
     <ol start={web === "WEB3" ? 4 : 1}>{items.map(({ number, title, copy, icon: Icon }) => <li key={number} data-step={number}>
@@ -37,7 +34,20 @@ function Layer({ items, web, name }: { items: typeof transaction; web: string; n
 }
 
 export function EcosystemSection() {
+  const { t } = useI18n();
   const sectionRef = useRef<HTMLElement>(null);
+
+  const transaction: StepItem[] = [
+    { number: "01", title: t.ecosystem.steps.step1Title, copy: t.ecosystem.steps.step1Copy, icon: Search },
+    { number: "02", title: t.ecosystem.steps.step2Title, copy: t.ecosystem.steps.step2Copy, icon: UserRound },
+    { number: "03", title: t.ecosystem.steps.step3Title, copy: t.ecosystem.steps.step3Copy, icon: ChartNoAxesColumnIncreasing },
+  ];
+
+  const infrastructure: StepItem[] = [
+    { number: "04", title: t.ecosystem.steps.step4Title, copy: t.ecosystem.steps.step4Copy, icon: Database },
+    { number: "05", title: t.ecosystem.steps.step5Title, copy: t.ecosystem.steps.step5Copy, icon: LayoutGrid },
+    { number: "06", title: t.ecosystem.steps.step6Title, copy: t.ecosystem.steps.step6Copy, icon: Blocks },
+  ];
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
@@ -78,14 +88,14 @@ export function EcosystemSection() {
 
   return <section ref={sectionRef} className="ecosystem" id="ecosystem" aria-labelledby="eco-title">
     <div className="glemo-container eco-container">
-      <p className="eco-label"><i aria-hidden="true" />04 — ECOSYSTEM</p>
+      <p className="eco-label"><i aria-hidden="true" />{t.ecosystem.label}</p>
       <header className="eco-heading">
-        <h2 id="eco-title">One ecosystem. Two <span>connected layers.</span></h2>
-        <p>glemO connects the efficiency of Web2 real estate operations with the infrastructure of Web3.</p>
+        <h2 id="eco-title">{t.ecosystem.titleMain} <span>{t.ecosystem.titleHighlight}</span></h2>
+        <p>{t.ecosystem.subtitle}</p>
       </header>
       <div className="eco-composition">
         <div className="eco-spine" aria-hidden="true"><i className="eco-spine-node" /></div>
-        <Layer items={transaction} web="WEB2" name="TRANSACTION LAYER" />
+        <Layer items={transaction} web="WEB2" name={t.ecosystem.web2LayerName} />
         <figure className="eco-visual">
           <img src="/ecosystem/connected-layers.webp" width="1254" height="1254" loading="lazy" decoding="async" alt="Two glemO mobile experiences connected through a luminous blue infrastructure network" />
           <img className="eco-devices" src="/ecosystem/connected-layers.webp" width="1254" height="1254" loading="lazy" decoding="async" alt="" aria-hidden="true" />
@@ -97,7 +107,7 @@ export function EcosystemSection() {
             <circle className="eco-flow-particle" r="2.8" />
           </g>)}
         </svg>
-        <Layer items={infrastructure} web="WEB3" name="INFRASTRUCTURE LAYER" />
+        <Layer items={infrastructure} web="WEB3" name={t.ecosystem.web3LayerName} />
       </div>
       <div className="eco-horizon" aria-hidden="true"><i /></div>
     </div>

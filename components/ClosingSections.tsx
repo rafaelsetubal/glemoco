@@ -2,18 +2,19 @@
 
 import { useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Globe2, X } from "lucide-react";
+import { useI18n } from "@/lib/i18n/context";
 
-// Photos, event names and destinations: https://glemo.co/About/index.html
-const events = [
-  { image: "imgCarrossel13.webp", title: "Web Summit Rio", detail: "2026 · Rio de Janeiro" },
-  { image: "imgCarrossel4.webp", title: "Summit ABRAINC", detail: "2025" },
-  { image: "imgInc1.webp", title: "INC Minas", detail: "2025" },
-  { image: "imgCarrossel5.webp", title: "glemO at ABRAINC", detail: "2025 · Exhibition stand" },
-  { image: "imgCarrossel9.webp", title: "INC Interior Paulista", detail: "Events gallery" },
-  { image: "imgCarrossel14.webp", title: "glemO Showcase", detail: "2026 · Web Summit Rio" },
-  { image: "imgCarrossel8.webp", title: "A new real estate experience", detail: "2025 · INC Minas" },
-  { image: "imgCarrossel15.webp", title: "glemO at Web Summit", detail: "2026 · Exhibition stand" },
+const eventImages = [
+  "imgCarrossel13.webp",
+  "imgCarrossel4.webp",
+  "imgInc1.webp",
+  "imgCarrossel5.webp",
+  "imgCarrossel9.webp",
+  "imgCarrossel14.webp",
+  "imgCarrossel8.webp",
+  "imgCarrossel15.webp",
 ];
+
 function InstagramIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -75,30 +76,55 @@ const social = [
 const contact = "https://api.whatsapp.com/send?phone=5531996390738";
 
 export function ClosingSections() {
+  const { t } = useI18n();
   const [start, setStart] = useState(0);
   const [selected, setSelected] = useState(0);
   const dialog = useRef<HTMLDialogElement>(null);
+
+  const eventItems = t.closing.events.items.map((item, i) => ({
+    image: eventImages[i] || "imgCarrossel13.webp",
+    title: item.title,
+    detail: item.detail,
+  }));
+
   const openPhoto = (index: number) => { setSelected(index); dialog.current?.showModal(); };
-  const stepPhoto = (delta: number) => setSelected(index => (index + delta + events.length) % events.length);
+  const stepPhoto = (delta: number) => setSelected(index => (index + delta + eventItems.length) % eventItems.length);
 
   return <div className="closing-chapters">
     <section className="leadership-section" id="leadership" aria-labelledby="leadership-title">
       <div className="glemo-container leadership-layout">
         <div className="leadership-copy">
-          <p className="closing-eyebrow">10 <span /> LEADERSHIP</p>
-          <h2 id="leadership-title">Built from experience.<br />Designed for what<br /><em>comes next.</em></h2>
-          <p className="closing-description">Gleisson Herit is the founder of glemO and a digital projects specialist since 2001. His experience includes more than 20 years with MRV and work with over 800 companies.</p>
-          <a className="closing-button" href="https://www.linkedin.com/in/gherit/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn <ArrowUpRight size={15} /></a>
+          <p className="closing-eyebrow">{t.closing.leadership.eyebrow}</p>
+          <h2 id="leadership-title">
+            {t.closing.leadership.titleMain}<br />
+            <em>{t.closing.leadership.titleHighlight}</em>
+          </h2>
+          <p className="closing-description">{t.closing.leadership.description}</p>
+          <a className="closing-button" href="https://www.linkedin.com/in/gherit/" target="_blank" rel="noopener noreferrer">
+            {t.closing.leadership.button} <ArrowUpRight size={15} />
+          </a>
           <dl className="leadership-facts">
-            <div><dt>20+</dt><dd>years of experience</dd></div>
-            <div><dt>800+</dt><dd>companies served</dd></div>
-            <div><dt>Real estate</dt><dd>digital expertise</dd></div>
+            <div>
+              <dt>{t.closing.leadership.facts.expVal}</dt>
+              <dd>{t.closing.leadership.facts.expLabel}</dd>
+            </div>
+            <div>
+              <dt>{t.closing.leadership.facts.companiesVal}</dt>
+              <dd>{t.closing.leadership.facts.companiesLabel}</dd>
+            </div>
+            <div>
+              <dt>{t.closing.leadership.facts.expertiseVal}</dt>
+              <dd>{t.closing.leadership.facts.expertiseLabel}</dd>
+            </div>
           </dl>
         </div>
         <div className="leadership-portrait">
           <svg className="leadership-skyline" viewBox="0 0 700 520" fill="none" aria-hidden="true"><path d="M40 520V220l70-40 70 40v300M240 520V85l65-40 65 40v435M440 520V130l80-45 100 55v380M110 180v340M305 45v475M520 85v435" /></svg>
           <img src="/founder/gleisson-herit-cutout.webp" alt="Gleisson Herit speaking about real estate and technology" loading="lazy" width="1254" height="1200" />
-          <p className="leadership-attribution"><strong>GLEISSON HERIT</strong><span>Founder, glemO</span></p>
+          <p className="leadership-attribution">
+            <strong>{t.closing.leadership.attributionName}</strong>
+            <span>{t.closing.leadership.attributionRole}</span>
+          </p>
         </div>
       </div>
     </section>
@@ -106,15 +132,28 @@ export function ClosingSections() {
     <section className="events-section" id="events" aria-labelledby="events-title">
       <div className="glemo-container events-layout">
         <header className="events-intro">
-          <p className="closing-eyebrow">11 <span /> IN THE WORLD</p>
-          <h2 id="events-title">Built in the market.<br />Present <em>where<br />the market moves.</em></h2>
-          <p className="closing-description">Connecting with the people shaping real estate, technology and innovation. Explore the events where glemO shares ideas and builds relationships.</p>
-          <div className="events-controls"><button aria-label="Previous events" onClick={() => setStart((start + events.length - 1) % events.length)}><ArrowLeft size={18} /></button><button aria-label="Next events" onClick={() => setStart((start + 1) % events.length)}><ArrowRight size={18} /></button><span aria-live="polite">{String(start + 1).padStart(2, "0")} / {String(events.length).padStart(2, "0")}</span></div>
+          <p className="closing-eyebrow">{t.closing.events.eyebrow}</p>
+          <h2 id="events-title">
+            {t.closing.events.titleMain}<br />
+            <em>{t.closing.events.titleHighlight}</em>
+          </h2>
+          <p className="closing-description">{t.closing.events.description}</p>
+          <div className="events-controls">
+            <button aria-label="Previous events" onClick={() => setStart((start + eventItems.length - 1) % eventItems.length)}>
+              <ArrowLeft size={18} />
+            </button>
+            <button aria-label="Next events" onClick={() => setStart((start + 1) % eventItems.length)}>
+              <ArrowRight size={18} />
+            </button>
+            <span aria-live="polite">
+              {String(start + 1).padStart(2, "0")} / {String(eventItems.length).padStart(2, "0")}
+            </span>
+          </div>
         </header>
         <div className="events-gallery">
           {Array.from({ length: 5 }, (_, offset) => {
-            const index = (start + offset) % events.length;
-            const event = events[index];
+            const index = (start + offset) % eventItems.length;
+            const event = eventItems[index];
             return <button className={`event-photo ${offset === 0 ? "event-photo--featured" : ""}`} key={index} onClick={() => openPhoto(index)} aria-label={`View photo: ${event.title}, ${event.detail}`}>
               <img src={`/events/${event.image}`} alt={event.title} loading="lazy" />
               <span className="event-caption"><strong>{event.title}</strong><small>{event.detail}</small></span><span className="event-arrow"><ArrowUpRight size={17} /></span>
@@ -124,23 +163,42 @@ export function ClosingSections() {
       </div>
       <dialog ref={dialog} className="event-lightbox" onClick={event => { if (event.target === event.currentTarget) dialog.current?.close(); }} onKeyDown={event => { if (event.key === "ArrowRight") stepPhoto(1); if (event.key === "ArrowLeft") stepPhoto(-1); }}>
         <button className="lightbox-close" onClick={() => dialog.current?.close()} aria-label="Close photo"><X /></button>
-        <img src={`/events/${events[selected].image}`} alt={events[selected].title} />
-        <div className="lightbox-caption"><button onClick={() => stepPhoto(-1)} aria-label="Previous photo"><ArrowLeft /></button><p>{events[selected].title}<small>{events[selected].detail}</small></p><button onClick={() => stepPhoto(1)} aria-label="Next photo"><ArrowRight /></button></div>
+        <img src={`/events/${eventItems[selected].image}`} alt={eventItems[selected].title} />
+        <div className="lightbox-caption">
+          <button onClick={() => stepPhoto(-1)} aria-label="Previous photo"><ArrowLeft /></button>
+          <p>{eventItems[selected].title}<small>{eventItems[selected].detail}</small></p>
+          <button onClick={() => stepPhoto(1)} aria-label="Next photo"><ArrowRight /></button>
+        </div>
       </dialog>
     </section>
 
     <section className="closing-cta" id="contact" aria-labelledby="closing-title">
       <div className="glemo-container closing-cta-layout"><div>
-        <h2 id="closing-title">Global real estate<br />is changing.<em>We’re building the<br />infrastructure for it.</em></h2>
-        <div className="closing-actions"><a className="closing-button closing-button--primary" href="#ecosystem">Explore the ecosystem <ArrowUpRight size={16} /></a><a className="closing-button" href={contact} target="_blank" rel="noopener noreferrer">Talk to us <ArrowUpRight size={16} /></a></div>
+        <h2 id="closing-title">
+          {t.closing.cta.titleMain}<br />
+          <em>{t.closing.cta.titleHighlight}</em>
+        </h2>
+        <div className="closing-actions">
+          <a className="closing-button closing-button--primary" href="#ecosystem">
+            {t.closing.cta.buttonPrimary} <ArrowUpRight size={16} />
+          </a>
+          <a className="closing-button" href={contact} target="_blank" rel="noopener noreferrer">
+            {t.closing.cta.buttonSecondary} <ArrowUpRight size={16} />
+          </a>
+        </div>
       </div></div>
     </section>
 
     <footer className="closing-footer"><div className="glemo-container closing-footer-layout">
       <a href="#top" aria-label="glemO home"><img className="closing-logo" src="/events/glemo.white.svg" alt="glemO" width="104" height="36" /></a>
-      <nav aria-label="Footer navigation"><a href="#ecosystem">Ecosystem</a><a href="#marketplace">Marketplace</a><a href="#roadmap">Roadmap</a><a href="#contact">Contact</a></nav>
+      <nav aria-label="Footer navigation">
+        <a href="#ecosystem">{t.nav.ecosystem}</a>
+        <a href="#marketplace">{t.nav.marketplace}</a>
+        <a href="#roadmap">{t.nav.roadmap}</a>
+        <a href="#contact">{t.nav.contact}</a>
+      </nav>
       <div className="closing-socials">{social.map(({ label, icon: Icon, href }) => <a href={href} key={label} aria-label={label} title={label} target="_blank" rel="noopener noreferrer"><Icon /></a>)}<a href="https://www.glemo.com.br/" aria-label="glemO portal" title="glemO portal" target="_blank" rel="noopener noreferrer"><Globe2 size={18} /></a></div>
-      <p className="closing-copyright">© {new Date().getFullYear()} glemO.<br />All rights reserved.</p>
+      <p className="closing-copyright">© {new Date().getFullYear()} {t.closing.footer.copyright}</p>
     </div></footer>
   </div>;
 }
