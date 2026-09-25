@@ -1,0 +1,60 @@
+:root {
+  --site-gutter: clamp(20px, 4vw, 64px);
+  --site-width: 1440px;
+  --section-space: clamp(96px, 11vw, 176px);
+  --line-primary: rgba(255, 255, 255, .05);
+  --line-secondary: rgba(255, 255, 255, .04);
+}
+
+* { box-sizing: border-box; }
+
+.glemo-container {
+  width: min(100%, var(--site-width)) !important;
+  max-width: var(--site-width) !important;
+  margin-inline: auto !important;
+  padding-inline: var(--site-gutter) !important;
+  box-sizing: border-box !important;
+}
+
+/* The page architecture: two structural container guides across all sections */
+.hero::after,
+.vision::after,
+.market-story::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: calc(min(100%, var(--site-width)) - (var(--site-gutter) * 2));
+  transform: translateX(-50%);
+  border-inline: 1px solid var(--line-secondary);
+}
+
+.vision-grid,
+.story-grid,
+.hero-inner,
+.hero-layout-grid,
+.nav-inner { position: relative; z-index: 1; }
+
+.vision { padding-block: var(--section-space); }
+
+.nav { height: 76px; }
+.nav-inner { padding-inline: var(--site-gutter) !important; }
+.brand { flex: 0 0 auto; display: flex; align-items: center; }
+.brand img { width: 142px; height: auto; display: block; }
+.brand span { display: none; }
+.nav nav { gap: clamp(16px, 1.8vw, 28px); }
+
+@media (max-width: 900px) {
+  .nav { height: 68px; }
+  .nav nav { gap: 16px; font-size: 9px; }
+  .brand img { width: 124px; }
+}
+
+@media (max-width: 700px) {
+  .nav { height: 62px; }
+  .nav-inner { padding-inline: 20px !important; }
+  .brand img { width: 112px; }
+}

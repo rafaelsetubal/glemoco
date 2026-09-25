@@ -1,0 +1,71 @@
+.ecosystem{position:relative;isolation:isolate;overflow:hidden;background:#020507;color:#eef2f5;border-top:1px solid rgba(255,255,255,.05);padding:64px 0 110px;scroll-margin-top:76px}
+.ecosystem:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,#020507 0%,rgba(2,5,7,.64) 25%,rgba(2,5,7,.3) 62%,rgba(2,5,7,.12) 100%),url('/ecosystem/earth-horizon.png') center bottom / 100% auto no-repeat}
+.eco-container{position:relative}
+.eco-container:before{content:"";position:absolute;inset:-64px var(--site-gutter) -110px;border-inline:1px solid rgba(255,255,255,.035);pointer-events:none}
+.eco-label{display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:.24em;margin:0 0 36px;color:#bdc7cd}
+.eco-label i{width:28px;height:1px;background:#20c7ff}
+.eco-heading{text-align:center;position:relative;z-index:2;max-width:1150px;margin:0 auto}
+.eco-heading h2{font-size:clamp(34px,3.5vw,58px);letter-spacing:-.045em;line-height:1.1;font-weight:400;margin:0;text-wrap:balance}
+.eco-heading h2 span{color:#35c7ed}
+.eco-heading>p{font-size:clamp(14px,1.15vw,18px);line-height:1.6;color:#aab8c2;max-width:880px;margin:20px auto 0;text-wrap:balance}
+.eco-composition{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.48fr) minmax(0,1fr);position:relative;align-items:center;margin-top:38px;min-height:520px}
+.eco-layer{position:relative;z-index:3;align-self:stretch;padding-top:22px}
+.eco-layer h3{font-size:10px;letter-spacing:.2em;font-weight:400;color:#c2cbd2;display:flex;gap:10px;white-space:nowrap;margin:0 0 30px}
+.eco-layer h3 span{color:#00adff;font-weight:600}
+.eco-layer ol{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.eco-layer li{display:grid;grid-template-columns:28px 54px minmax(0,1fr);gap:12px;align-items:start;min-height:132px;padding:16px 0 22px;border-bottom:1px solid rgba(40,170,255,.09)}
+.eco-number{font-size:23px;font-weight:300;color:#12b8ff;padding-top:12px;letter-spacing:-.06em}
+.eco-icon{width:54px;height:54px;display:grid;place-items:center;border:1px solid rgba(0,177,255,.3);border-radius:50%;color:#00baff;background:#02090e}
+.eco-layer h4{font-size:21px;line-height:1.2;letter-spacing:-.025em;font-weight:400;margin:4px 0 7px}
+.eco-layer li p{font-size:14px;color:#a6b3bd;line-height:1.5;margin:0;max-width:225px}
+.eco-web3 h3 span,.eco-web3 .eco-number,.eco-web3 .eco-icon{color:#00d5df}
+.eco-web3{padding-left:8px}
+.eco-visual{position:relative;z-index:2;margin:0 -50px;pointer-events:none;align-self:center;mix-blend-mode:screen}
+.eco-visual img{display:block;width:100%;height:auto;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 83%,transparent),radial-gradient(ellipse at center,#000 48%,rgba(0,0,0,.85) 61%,transparent 73%);mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 83%,transparent),radial-gradient(ellipse at center,#000 48%,rgba(0,0,0,.85) 61%,transparent 73%);-webkit-mask-composite:source-in;mask-composite:intersect}
+.eco-routes{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;fill:none;stroke:#00aaff;stroke-width:1;opacity:.65}
+.eco-routes>g:nth-child(2){stroke:#00d7e9}
+.eco-route-nodes{fill:#9eeaff;stroke:none}
+.eco-horizon{position:absolute;left:50%;bottom:-70px;height:60px;width:1px;background:linear-gradient(#23bfff,transparent);pointer-events:none;z-index:-1}
+.eco-horizon i{position:absolute;left:50%;top:-55px;height:55px;width:1px;background:linear-gradient(transparent,#23bfff)}
+/* Product hierarchy: quiet shell, clear devices, connections carry motion. */
+.ecosystem:before{opacity:.64;filter:saturate(.65)}
+.eco-composition{margin-top:60px}
+.ecosystem{padding-bottom:88px}
+.eco-visual{transform:scale(1.08);transform-origin:50% 53%;mix-blend-mode:normal;margin-inline:-24px}
+.eco-visual>img:first-child{filter:brightness(.68)}
+.eco-visual img.eco-devices{position:absolute;inset:0;opacity:1;-webkit-mask-image:radial-gradient(ellipse 30% 34% at 50% 51%,#000 60%,rgba(0,0,0,.85) 78%,transparent 100%);mask-image:radial-gradient(ellipse 30% 34% at 50% 51%,#000 60%,rgba(0,0,0,.85) 78%,transparent 100%)}
+.eco-visual:before{content:"";position:absolute;inset:22% 20%;background:radial-gradient(ellipse,rgba(14,171,235,var(--core-response,.045)),transparent 70%);transition:background .4s;pointer-events:none}
+.eco-layer li{--flow:0;position:relative}
+.eco-number{font-family:monospace;font-size:13px;letter-spacing:.08em;padding-top:16px;color:#258ddc}
+.eco-layer h4{font-size:23px;font-weight:500;color:#bac5ce;transition:color .5s}
+.eco-layer li p{color:#8c9ba6}
+.eco-step-reached h4{color:#f2f6fa}
+.eco-step-reached .eco-icon{border-color:rgba(34,150,255,.6);transition:border-color .5s}
+.eco-web3 .eco-step-reached .eco-icon{border-color:rgba(0,210,220,.6)}
+.eco-routes{opacity:1;overflow:visible}
+.eco-routes>g.eco-flow-web2{stroke:#168dff;color:#168dff}
+.eco-routes>g.eco-flow-web3{stroke:#00d5df;color:#00d5df}
+.eco-route-track{opacity:.12}
+.eco-route-draw{stroke-dasharray:1;stroke-dashoffset:1;stroke-width:1.3}
+.eco-flow-particle{fill:#d5f5ff;stroke:currentColor;opacity:0;filter:drop-shadow(0 0 4px currentColor)}
+.eco-spine{position:absolute;left:50%;top:-42px;bottom:-35px;width:1px;background:linear-gradient(transparent,rgba(18,129,205,.24) 12%,rgba(18,129,205,.1) 80%,rgba(18,129,205,.4));pointer-events:none;z-index:1}
+.eco-spine-node{position:absolute;left:-2px;width:5px;height:5px;border-radius:50%;background:#ffb568;box-shadow:0 0 9px #e88323;opacity:0}
+.eco-horizon{display:none}
+@media(max-width:800px){
+  .eco-composition{display:flex;flex-direction:column;align-items:stretch;gap:34px;margin-top:38px}
+  .eco-layer{width:100%}
+  .eco-web2{order:0}.eco-visual{order:1!important;width:min(100%,480px)!important;margin:0 auto!important}.eco-web3{order:2}
+  .eco-layer li{min-height:116px;grid-template-columns:28px 50px 1fr;gap:14px;padding:16px 0 22px}
+  .eco-icon{width:50px;height:50px}
+  .eco-layer h4{font-size:23px}.eco-layer li p{font-size:14px;max-width:390px}
+  .eco-number{font-size:13px;padding-top:16px}
+  .eco-layer li:after{content:"";position:absolute;left:66px;top:69px;bottom:-8px;width:1px;background:linear-gradient(to bottom,#168dff,rgba(22,141,255,.16));transform:scaleY(var(--flow));transform-origin:top}
+  .eco-web3 li:after{background:linear-gradient(to bottom,#00d5df,rgba(0,213,223,.16))}
+  .eco-layer li:before{content:"";position:absolute;left:64px;top:calc(69px + (100% - 69px) * var(--flow));width:5px;height:5px;border-radius:50%;background:#b7edff;box-shadow:0 0 6px #168dff;opacity:var(--particle,0)}
+  .eco-spine{top:36%;bottom:36%;opacity:.4}
+}
+@media(min-width:1500px){.eco-composition{min-height:580px}.eco-layer li{min-height:150px}}
+@media(max-width:1100px){.eco-composition{grid-template-columns:1fr 1.15fr 1fr}.eco-layer li{grid-template-columns:22px 38px minmax(0,1fr);gap:8px}.eco-icon{width:38px;height:38px}.eco-icon svg{width:20px}.eco-number{font-size:19px;padding-top:6px}.eco-layer h4{font-size:19px}.eco-layer li p{font-size:13px}.eco-layer h3{font-size:9px;letter-spacing:.12em}.eco-visual{margin:0 -30px}}
+@media(max-width:800px){.ecosystem{padding:48px 0 64px}.eco-label{margin-bottom:28px}.eco-composition{grid-template-columns:1fr 1fr;gap:30px;margin-top:16px;min-height:0}.eco-visual{grid-column:1/-1;grid-row:1;margin:0 auto;width:min(100%,480px)}.eco-layer{grid-row:2;padding:0}.eco-layer h3{white-space:normal;line-height:1.6;margin-bottom:14px}.eco-layer li{min-height:136px}.eco-routes{display:none}.eco-horizon{bottom:-200px}.eco-container:before{inset:-48px var(--site-gutter) -64px}}
+@media(max-width:520px){.eco-heading{text-align:left}.eco-heading h2{font-size:36px}.eco-heading>p{font-size:15px;margin-top:16px}.eco-composition{display:flex;flex-direction:column;align-items:stretch;gap:30px}.eco-visual{order:-1;width:calc(100% + 24px);max-width:none;margin:0 -12px -20px}.eco-layer h3{font-size:11px;letter-spacing:.16em}.eco-layer li{grid-template-columns:28px 50px 1fr;gap:14px;min-height:108px;padding:16px 0}.eco-icon{width:50px;height:50px}.eco-layer h4{font-size:21px}.eco-layer li p{font-size:14px;max-width:none}.eco-web3{padding:0}}
+@media(max-width:800px){.eco-composition{margin-top:38px}.eco-number{font-size:13px;padding-top:16px}.eco-layer h4{font-size:23px}.eco-layer li{padding-bottom:22px}}

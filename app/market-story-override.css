@@ -1,0 +1,446 @@
+/* =========================================================================
+   glemO.co — SECTION 03: MARKET DATA (CONCENTRATED EDITORIAL COMPOSITION)
+   ========================================================================= */
+
+.market-story {
+  position: relative;
+  overflow: hidden;
+  height: 100svh;
+  min-height: clamp(660px, 88vh, 880px);
+  max-height: 980px;
+  background: #020406 !important;
+  padding: clamp(38px, 5vh, 60px) 0 clamp(24px, 3vh, 40px);
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* 1. Full-Section Background Video Layer (Earth Curvature + Global Arcs) */
+.market-video-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.market-bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 50%;
+  opacity: 0.94;
+  filter: contrast(1.08) brightness(1.02);
+}
+
+/* 2. Layered Readability Protection Overlays with Lateral Falloff & Central Spotlight */
+.market-video-protection-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    /* Lateral Falloff: outer 15-20% progressively fading into #020406 */
+    linear-gradient(90deg, #020406 0%, rgba(2, 4, 8, 0.88) 12%, rgba(2, 4, 8, 0.18) 32%, rgba(2, 4, 8, 0.18) 68%, rgba(2, 4, 8, 0.88) 88%, #020406 100%),
+    /* Vertical Tone: darker top behind info, clear middle, soft bottom fade */
+    linear-gradient(180deg, rgba(2, 4, 8, 0.82) 0%, rgba(2, 4, 8, 0.55) 24%, rgba(2, 4, 8, 0.05) 50%, rgba(2, 4, 8, 0.55) 86%, #020406 100%);
+  pointer-events: none;
+}
+
+/* 3. Panel Container (Strictly Aligned with Global Site Grid) */
+.market-panel {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Top Header Row: Left Narrative (~48-50%) + Right US$ 290T Panel (~44-46%) */
+.market-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(20px, 2.8vw, 38px);
+  width: 100%;
+}
+
+.market-intro {
+  flex: 1 1 50%;
+  max-width: 540px;
+}
+
+.market-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: #8c9fae;
+  text-transform: uppercase;
+  margin: 0 0 clamp(10px, 1.4vh, 16px);
+  font-weight: 500;
+}
+
+.market-label-tick {
+  width: 9px;
+  height: 1px;
+  background: #00baff;
+  display: inline-block;
+  opacity: 0.85;
+}
+
+.market-headline {
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.07;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  font-weight: 500;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.market-desc {
+  margin: 12px 0 0;
+  font-size: clamp(13.5px, 0.95vw, 15.5px);
+  color: #8e9fae;
+  line-height: 1.48;
+  max-width: 440px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 4. FEATURED MARKET METRIC PANEL (US$ 290T HUD BLUEPRINT) */
+.featured-market-metric {
+  position: relative;
+  flex: 0 0 clamp(360px, 32vw, 480px);
+  width: clamp(360px, 32vw, 480px);
+  padding: clamp(16px, 1.8vw, 24px) clamp(22px, 2.2vw, 30px);
+  background: rgba(5, 11, 20, 0.44);
+  backdrop-filter: blur(12px) saturate(130%);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+  border: 1px solid rgba(0, 186, 255, 0.24);
+  border-radius: 1px;
+  box-shadow: 0 10px 32px rgba(0, 40, 90, 0.12), inset 0 0 24px rgba(0, 150, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.featured-market-metric:hover {
+  border-color: rgba(0, 186, 255, 0.38);
+  box-shadow: 0 12px 40px rgba(0, 60, 140, 0.18), inset 0 0 28px rgba(0, 180, 255, 0.05);
+}
+
+/* Top Edge Cyan Glow Line */
+.metric-glow-edge {
+  position: absolute;
+  top: -1px;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 186, 255, 0.35),
+    rgba(0, 220, 255, 0.95),
+    rgba(0, 186, 255, 0.35),
+    transparent
+  );
+  box-shadow: 0 0 8px rgba(0, 186, 255, 0.35);
+  pointer-events: none;
+}
+
+/* Intense Cyan Flare Light Point */
+.metric-flare-dot {
+  position: absolute;
+  top: -4px;
+  right: 32%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow:
+    0 0 10px 3px rgba(0, 220, 255, 0.95),
+    0 0 24px 6px rgba(0, 140, 255, 0.55);
+  pointer-events: none;
+}
+
+/* Technical Corner Markers */
+.metric-corner-marker-tl {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #00baff;
+  border-left: 2px solid #00baff;
+  pointer-events: none;
+}
+
+.metric-corner-marker-br {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 6px;
+  height: 6px;
+  border-bottom: 1px solid rgba(0, 186, 255, 0.6);
+  border-right: 1px solid rgba(0, 186, 255, 0.6);
+  pointer-events: none;
+}
+
+/* Panel Body */
+.metric-panel-body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.metric-micro-label {
+  font-weight: 500;
+  display: block;
+}
+
+.metric-top-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(180, 205, 225, 0.65);
+  text-align: left;
+  margin-bottom: clamp(6px, 1vh, 12px);
+}
+
+.metric-primary-value {
+  margin-bottom: 3px;
+}
+
+.metric-primary-value strong {
+  font-size: clamp(56px, 5.5vw, 80px);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  white-space: nowrap;
+  display: block;
+  -webkit-font-smoothing: antialiased;
+}
+
+.metric-bottom-label {
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(180, 205, 225, 0.6);
+  align-self: flex-end;
+  text-align: right;
+  margin-top: 2px;
+}
+
+/* 5. SUPPORTING METRIC BAND (SHARED CONTRAST SURFACE & HIGH VISIBILITY NUMBERS) */
+.market-metric-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  width: 100%;
+  margin-top: clamp(18px, 2.4vh, 28px);
+  background: rgba(5, 10, 18, 0.62);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), inset 0 0 20px rgba(0, 150, 255, 0.02);
+  padding: clamp(14px, 1.8vh, 20px) clamp(10px, 1.4vw, 20px);
+}
+
+.metric-col {
+  position: relative;
+  padding: 0 clamp(8px, 1.2vw, 16px);
+  border-left: 1px solid rgba(255, 255, 255, 0.09);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.metric-col:first-child {
+  border-left: none;
+  padding-left: clamp(4px, 0.6vw, 10px);
+}
+
+.metric-col:last-child {
+  padding-right: clamp(4px, 0.6vw, 10px);
+}
+
+.metric-col-tick {
+  position: absolute;
+  top: -1px;
+  left: -2px;
+  width: 4px;
+  height: 1px;
+  background: rgba(0, 186, 255, 0.7);
+}
+
+.metric-col:first-child .metric-col-tick {
+  display: none;
+}
+
+.metric-col-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Strong Sharp Leading Numbers (Zero Blur) */
+.metric-col strong {
+  font-size: clamp(26px, 2.4vw, 36px);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  display: block;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Secondary Sub-Labels */
+.metric-col span {
+  font-size: clamp(9px, 0.72vw, 10.5px);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(160, 180, 195, 0.72);
+  font-weight: 500;
+  line-height: 1.32;
+  margin-top: 4px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Crisp Solid Colors (No Blur / Glow) */
+.metric-cyan strong {
+  color: #00d4ff;
+}
+
+.metric-orange strong {
+  color: #ff9d00;
+}
+
+.metric-white strong {
+  color: #ffffff;
+}
+
+/* Crisp Solid USA & DUBAI / MASSIVE AI Authority */
+.metric-col-tag strong {
+  font-size: clamp(14px, 1.2vw, 18px);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #00d4ff;
+  white-space: nowrap;
+}
+
+.metric-col-layer strong {
+  font-size: clamp(14px, 1.2vw, 18px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* 6. BOTTOM OPEN VIEWPORT (CINEMATIC GLOBE & NETWORK ARCS) */
+.market-globe-stage {
+  flex: 1;
+  min-height: clamp(140px, 24vh, 340px);
+  pointer-events: none;
+}
+
+/* =========================================================================
+   Responsive Adjustments
+   ========================================================================= */
+@media (max-width: 960px) {
+  .market-story {
+    height: auto;
+    min-height: 100svh;
+    max-height: none;
+    padding: 56px 0 40px;
+  }
+
+  .market-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .featured-market-metric {
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: auto;
+    padding: 20px 22px;
+  }
+
+  .metric-primary-value strong {
+    font-size: clamp(48px, 10vw, 70px);
+  }
+
+  .market-metric-strip {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 16px;
+    margin-top: 22px;
+    padding: 16px 14px;
+  }
+
+  .metric-col {
+    padding: 0 10px;
+  }
+
+  .metric-col:first-child {
+    padding-left: 10px;
+  }
+}
+
+@media (max-width: 640px) {
+  .market-story {
+    padding: 52px 0 32px;
+  }
+
+  .market-headline {
+    font-size: clamp(24px, 7.2vw, 32px);
+    line-height: 1.08;
+  }
+
+  .market-desc {
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .featured-market-metric {
+    padding: 16px 18px;
+  }
+
+  .metric-primary-value strong {
+    font-size: clamp(44px, 12vw, 58px);
+  }
+
+  .market-metric-strip {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 12px;
+    padding: 14px 12px;
+  }
+
+  .metric-col:nth-child(odd) {
+    border-left: none;
+    padding-left: 4px;
+    padding-right: 8px;
+  }
+
+  .metric-col:nth-child(even) {
+    border-left: 1px solid rgba(255, 255, 255, 0.09);
+    padding-left: 10px;
+  }
+
+  .metric-col-layer {
+    grid-column: 1 / -1;
+    border-left: none !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
+    padding: 10px 4px 2px !important;
+    margin-top: 2px;
+  }
+
+  .market-globe-stage {
+    min-height: 60px;
+  }
+}
