@@ -9,8 +9,6 @@ export function Navbar() {
   const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const lastY = useRef(0);
 
   const navItems = [
     { label: t.nav.about, href: "#leadership" },
@@ -21,30 +19,18 @@ export function Navbar() {
   ];
 
   useEffect(() => {
-    const update = () => {
-      const y = window.scrollY;
-      const delta = y - lastY.current;
-      setScrolled(y > 16);
-      if (y < 90) setHidden(false);
-      else if (delta > 5) setHidden(true);
-      else if (delta < -5) setHidden(false);
-      lastY.current = y;
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
     };
-    const wheel = (event: WheelEvent) => {
-      if (event.deltaY < -2) setHidden(false);
-      if (event.deltaY > 2 && window.scrollY > 90) setHidden(true);
-    };
-    update();
-    addEventListener("scroll", update, { passive: true });
-    addEventListener("wheel", wheel, { passive: true });
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
-      removeEventListener("scroll", update);
-      removeEventListener("wheel", wheel);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <header className={`nav ${scrolled ? "nav-scrolled" : ""} ${hidden && !open ? "nav-hidden" : ""}`}>
+    <header className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
       <div className="glemo-container nav-inner">
         <a href="#top" className="brand" aria-label="GlemO home">
           <img src="/brand/glemo-official.webp" alt="GlemO" width="142" height="45" />
