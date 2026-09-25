@@ -7,7 +7,7 @@
   position: fixed;
   inset: 0;
   z-index: 999999;
-  background: radial-gradient(circle at 50% 45%, #051624 0%, #02070c 60%, #010408 100%);
+  background: #000000;
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
   display: flex;
@@ -17,18 +17,18 @@
   pointer-events: all;
   user-select: none;
   overflow: hidden;
-  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-              backdrop-filter 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-              -webkit-backdrop-filter 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, backdrop-filter, transform;
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              backdrop-filter 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              -webkit-backdrop-filter 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 
 .preloader-overlay.preloader-dissolve {
   opacity: 0 !important;
   backdrop-filter: blur(0px) !important;
   -webkit-backdrop-filter: blur(0px) !important;
-  transform: scale(1.025) translateZ(0);
+  transform: scale(1.02) translateZ(0);
   pointer-events: none !important;
 }
 
@@ -36,12 +36,12 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 480px;
-  height: 480px;
+  width: 440px;
+  height: 440px;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(0, 200, 247, 0.12) 0%, transparent 68%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 68%);
   pointer-events: none;
-  filter: blur(40px);
+  filter: blur(50px);
 }
 
 .preloader-content {
@@ -56,7 +56,7 @@
 
 .preloader-overlay.preloader-dissolve .preloader-content {
   opacity: 0;
-  transform: scale(0.96);
+  transform: scale(0.97);
 }
 
 .preloader-logo-wrap {
@@ -70,17 +70,17 @@
 .preloader-logo {
   width: 132px;
   height: auto;
-  filter: drop-shadow(0 0 16px rgba(0, 200, 247, 0.45));
+  filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.3));
   animation: preloader-logo-pulse 2s ease-in-out infinite alternate;
 }
 
 @keyframes preloader-logo-pulse {
   0% {
-    filter: drop-shadow(0 0 12px rgba(0, 200, 247, 0.3));
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.18));
     transform: scale(0.985);
   }
   100% {
-    filter: drop-shadow(0 0 24px rgba(0, 200, 247, 0.65));
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.45));
     transform: scale(1.015);
   }
 }
@@ -93,14 +93,14 @@
   border-radius: 2px;
   overflow: hidden;
   position: relative;
-  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.8);
 }
 
 .preloader-bar {
   height: 100%;
-  background: linear-gradient(90deg, #0088cc 0%, #00c8f7 70%, #8de4ff 100%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, #00baff 70%, #ffffff 100%);
   border-radius: 2px;
-  box-shadow: 0 0 10px #00c8f7, 0 0 18px rgba(0, 200, 247, 0.8);
+  box-shadow: 0 0 12px rgba(0, 186, 255, 0.7);
   transition: width 0.05s linear;
 }
 
@@ -117,15 +117,15 @@
 }
 
 .preloader-counter {
-  color: #00c8f7;
+  color: #ffffff;
   font-weight: 600;
-  text-shadow: 0 0 8px rgba(0, 200, 247, 0.5);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 .preloader-status {
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 9px;
-  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
 }
 
 /* 2. Coordinated Line-by-Line Hero Headline Entrance */

@@ -7,6 +7,18 @@ export function Preloader() {
   const [phase, setPhase] = useState<"loading" | "dissolving" | "done">("loading");
 
   useEffect(() => {
+    // Check if user already saw the preloader in this session
+    try {
+      const alreadyLoaded = sessionStorage.getItem("glemo_preloader_seen");
+      if (alreadyLoaded === "true") {
+        document.body.classList.add("preloader-loaded");
+        setPhase("done");
+        return;
+      }
+    } catch {
+      // ignore
+    }
+
     // Check if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) {
@@ -17,7 +29,7 @@ export function Preloader() {
 
     let current = 0;
     const interval = setInterval(() => {
-      current += Math.floor(Math.random() * 16) + 10;
+      current += Math.floor(Math.random() * 18) + 12;
       if (current >= 100) {
         current = 100;
         setProgress(100);
@@ -27,16 +39,21 @@ export function Preloader() {
         setTimeout(() => {
           setPhase("dissolving");
           document.body.classList.add("preloader-loaded");
+          try {
+            sessionStorage.setItem("glemo_preloader_seen", "true");
+          } catch {
+            // ignore
+          }
 
           // Remove when fade & blur are fully complete
           setTimeout(() => {
             setPhase("done");
-          }, 800);
-        }, 120);
+          }, 700);
+        }, 100);
       } else {
         setProgress(current);
       }
-    }, 40);
+    }, 35);
 
     return () => clearInterval(interval);
   }, []);
