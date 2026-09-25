@@ -26,6 +26,36 @@ export interface GalleryEventItem {
 
 export const galleryEvents: GalleryEventItem[] = [
   {
+    id: "gbc-london-agora",
+    image: "gbc-london-agora.webp",
+    title: "Global Blockchain Congress",
+    detail: "Londres, Reino Unido · Agora GBC",
+  },
+  {
+    id: "gbc-london-panel",
+    image: "gbc-london-panel.webp",
+    title: "Painel Global Blockchain Congress",
+    detail: "Londres · Infraestrutura Web3 & RWA",
+  },
+  {
+    id: "gbc-london-app-demo",
+    image: "gbc-london-app-demo.webp",
+    title: "Demonstração glemO App",
+    detail: "Londres · Global Blockchain Congress",
+  },
+  {
+    id: "gbc-london-meeting",
+    image: "gbc-london-meeting.webp",
+    title: "Rodada de Negócios",
+    detail: "Londres · Global Blockchain Congress",
+  },
+  {
+    id: "gbc-london-table",
+    image: "gbc-london-table.webp",
+    title: "glemO no GBC Londres",
+    detail: "Presença & Conexões Internacionais",
+  },
+  {
     id: "web-summit-rio-2026",
     image: "imgCarrossel13.webp",
     title: "Web Summit Rio",

@@ -283,6 +283,11 @@ export const en: Dictionary = {
       description:
         "Connecting with the people shaping real estate, technology and innovation. Explore the events where glemO shares ideas and builds relationships.",
       items: [
+        { title: "Global Blockchain Congress", detail: "London, UK · Agora GBC" },
+        { title: "Global Blockchain Congress Panel", detail: "London · Web3 & RWA Infrastructure" },
+        { title: "glemO App Demonstration", detail: "London · Global Blockchain Congress" },
+        { title: "Business Networking", detail: "London · Global Blockchain Congress" },
+        { title: "glemO at GBC London", detail: "Global Presence & Strategic Connections" },
         { title: "Web Summit Rio", detail: "2026 · Rio de Janeiro" },
         { title: "Summit ABRAINC", detail: "2025" },
         { title: "INC Minas", detail: "2025" },
