@@ -29,6 +29,17 @@ export function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <header className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
       <div className="glemo-container nav-inner">
@@ -51,19 +62,31 @@ export function Navbar() {
         </button>
       </div>
       {open && (
-        <div className="mobile-overlay">
-          <button onClick={() => setOpen(false)} aria-label="Close navigation">
-            <X />
-          </button>
-          {navItems.map((item) => (
-            <a href={item.href} key={item.href} onClick={() => setOpen(false)}>
-              {item.label}
+        <div className="mobile-overlay" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+          <div className="mobile-overlay-header">
+            <a href="#top" className="brand" onClick={() => setOpen(false)} aria-label="GlemO home">
+              <img src="/brand/glemo-official.webp" alt="GlemO" width="128" height="40" />
             </a>
-          ))}
-          <a href="mailto:gleisson@glemo.co" onClick={() => setOpen(false)}>
-            {t.nav.contact} <ArrowUpRight />
-          </a>
-          <LanguageSelector isMobile />
+            <button className="mobile-close-btn" onClick={() => setOpen(false)} aria-label="Close navigation">
+              <X size={22} />
+            </button>
+          </div>
+          
+          <div className="mobile-overlay-nav">
+            {navItems.map((item) => (
+              <a href={item.href} key={item.href} onClick={() => setOpen(false)}>
+                {item.label}
+              </a>
+            ))}
+          </div>
+
+          <div className="mobile-overlay-footer">
+            <a href="mailto:gleisson@glemo.co" className="mobile-contact-btn" onClick={() => setOpen(false)}>
+              <span>{t.nav.contact}</span>
+              <ArrowUpRight size={16} />
+            </a>
+            <LanguageSelector isMobile />
+          </div>
         </div>
       )}
     </header>
