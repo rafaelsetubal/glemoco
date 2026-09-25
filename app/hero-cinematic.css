@@ -534,17 +534,22 @@
 
   .hero-headline-mobile .hero-headline-line {
     display: block;
-    line-height: 1.08;
-    white-space: nowrap;
+    line-height: 1.15;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
   }
 
   .hero-headline {
-    font-size: clamp(26px, 7.2vw, 34px);
-    line-height: 1.08;
+    font-size: clamp(24px, 6.8vw, 34px);
+    line-height: 1.12;
     letter-spacing: -0.04em;
-    max-width: 320px;
+    max-width: 340px;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
+    overflow-wrap: break-word;
+    word-break: normal;
   }
 
   .hero-support-mobile {
