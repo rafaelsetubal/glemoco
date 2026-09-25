@@ -307,7 +307,7 @@ export const fr: Dictionary = {
       buttonSecondary: "Échanger avec nous",
     },
     footer: {
-      copyright: `© ${new Date().getFullYear()} glemO. Tous droits réservés.`,
+      copyright: "glemO. Tous droits réservés.",
     },
   },
 };

@@ -34,13 +34,13 @@ export const pt: Dictionary = {
     supportDesktop:
       "Imóveis, pessoas, dados e oportunidades em um único ecossistema.",
     supportMobile: "Imóveis, dados e oportunidades em um único ecossistema.",
-    ctaPrimary: "Explorar ecossistema",
+    ctaPrimary: "Explorar o ecossistema",
     ctaSecondary: "Fale conosco",
     indicators: {
       globalNetwork: "REDE GLOBAL",
       live: "AO VIVO",
       keyMarkets: "06",
-      keyMarketsLabel: "MERCADOS CHAVE",
+      keyMarketsLabel: "MERCADOS-CHAVE",
       connections: "120+",
       connectionsLabel: "CONEXÕES",
     },
@@ -50,7 +50,7 @@ export const pt: Dictionary = {
     headlineLine1: "O mercado imobiliário é global.",
     headlineLine2: "Sua infraestrutura também deve ser.",
     statementP1:
-      "O mercado imobiliário é o maior ativo financeiro do mundo, porém a adoção tecnológica permanece lenta e fragmentada.",
+      "O setor imobiliário é a maior classe de ativos do mundo, porém sua adoção tecnológica permanece lenta e fragmentada.",
     statementP2:
       "Transações internacionais ainda são complexas, limitando o acesso a oportunidades globais.",
     quote:
@@ -65,7 +65,7 @@ export const pt: Dictionary = {
     descLine1:
       "O setor imobiliário é a maior classe de ativos do mundo — com mais de US$ 700 bilhões",
     descLine2:
-      "em volume de transações anuais, porém a adoção de tecnologia permanece fragmentada.",
+      "em volume global de transações anuais, porém a adoção tecnológica permanece fragmentada.",
     featuredTop: "SEGMENTO RESIDENCIAL GLOBAL",
     featuredValue: "US$ 290T",
     featuredBottom: "VOLUME ANUAL DE TRANSAÇÕES > US$ 700B",
@@ -87,7 +87,7 @@ export const pt: Dictionary = {
     titleMain: "Um ecossistema. Duas",
     titleHighlight: "camadas conectadas.",
     subtitle:
-      "O glemO conecta a eficiência das operações imobiliárias Web2 à infraestrutura descentralizada da Web3.",
+      "O glemO conecta a eficiência das operações imobiliárias da Web2 à infraestrutura descentralizada da Web3.",
     web2LayerName: "CAMADA TRANSACIONAL",
     web3LayerName: "CAMADA DE INFRAESTRUTURA",
     steps: {
@@ -95,7 +95,7 @@ export const pt: Dictionary = {
       step1Copy: "Compradores acessam o marketplace para buscar imóveis.",
       step2Title: "Qualificar",
       step2Copy:
-        "A demanda qualificada é roteada para o parceiro responsável pela venda.",
+        "A demanda qualificada é direcionada ao parceiro responsável pela venda.",
       step3Title: "Converter",
       step3Copy:
         "Transações concluídas geram receita para o marketplace glemO.",
@@ -115,7 +115,7 @@ export const pt: Dictionary = {
       label: "05 — WEB2",
       titleMain: "Construído para o",
       titleHighlight: "mercado de hoje.",
-      copy: "O glemO conecta demanda, qualificação e distribuição por meio de uma infraestrutura digital madura para o mercado imobiliário.",
+      copy: "O glemO conecta demanda, qualificação e distribuição por meio de uma infraestrutura imobiliária digital madura.",
       capabilities: ["AQUISIÇÃO", "QUALIFICAÇÃO", "DISTRIBUIÇÃO"],
       capabilityDetails: [
         "Atrair e capturar demanda de alta intenção.",
@@ -127,7 +127,7 @@ export const pt: Dictionary = {
       label: "06 — WEB3",
       titleMain: "Construindo a infraestrutura",
       titleHighlight: "para o que vem a seguir.",
-      copy: "O glemO está desenvolvendo uma plataforma RWA projetada para conectar ativos do mundo real, propriedade digital e novos modelos de incentivo.",
+      copy: "O glemO desenvolve uma plataforma RWA projetada para conectar ativos do mundo real, propriedade digital e novos modelos de incentivo.",
       capabilities: ["RWA", "TOKENIZAÇÃO", "DISTRIBUIÇÃO"],
       capabilityDetails: [
         "Ativos do mundo real tokenizados e acessíveis.",
@@ -139,7 +139,7 @@ export const pt: Dictionary = {
   marketplace: {
     label: "07 — MARKETPLACE",
     titleMain: "Um marketplace. Aplicativos, IA e dApps",
-    titleHighlight: "desenvolvidos para real estate.",
+    titleHighlight: "desenvolvidos para o mercado imobiliário.",
     intro:
       "Descubra ferramentas para aquisição, vendas, conteúdo, operações e infraestrutura tokenizada.",
     categories: {
@@ -158,7 +158,7 @@ export const pt: Dictionary = {
         title: "EVA",
         subtitle: "Treinamento de Corretores",
         description:
-          "Sua companheira de capacitação com IA. Aprendizado personalizado, simulações reais e orientação contínua para corretores modernos.",
+          "Sua companheira de capacitação com IA. Aprendizado personalizado, simulações reais e orientação contínua 24/7 para corretores modernos.",
         features: ["Aprendizado personalizado", "Cenários do mundo real", "Suporte IA 24/7"],
       },
       presence: {
@@ -172,35 +172,35 @@ export const pt: Dictionary = {
         title: "Broker Journey",
         subtitle: "Assistência 24/7",
         description:
-          "Um co-piloto com IA para cada etapa da jornada do corretor — do lead ao fechamento.",
+          "Um copiloto com IA para cada etapa da jornada do corretor — do lead ao fechamento.",
         features: ["Gestão de leads", "Orientação estratégica", "Negociação", "Fechamento"],
       },
       zones: {
         title: "Hot Zones",
         subtitle: "Inteligência de Mercado e Vendas",
         description:
-          "Identifique regiões de alto potencial com dados preditivos de mercado e vendas impulsionados por IA.",
+          "Identifique regiões de alto potencial com dados de mercado e inteligência preditiva de vendas.",
         features: ["Inteligência de mercado", "Descoberta de oportunidades"],
       },
       rewards: {
         title: "Referral Rewards",
         subtitle: "Aquisição de Clientes",
         description:
-          "Transforme relacionamentos em negócios com recompensas automatizadas por indicações.",
+          "Transforme sua rede de relacionamentos em negócios com recompensas automatizadas por indicação.",
         features: ["Rede de indicações", "Aquisição acelerada de clientes"],
       },
       studio: {
         title: "Multimedia Studio",
         subtitle: "Criação de Anúncios",
         description:
-          "Gere conteúdo imobiliário profissional com IA — imagens, vídeos e campanhas de alta conversão.",
+          "Crie conteúdo imobiliário de alta conversão com IA — imagens, vídeos e campanhas publicitárias.",
         features: ["Imagens", "Vídeos", "Campanhas publicitárias"],
       },
       seo: {
         title: "SEO & Content Analyzer",
         subtitle: "Inteligência de Conteúdo",
         description:
-          "Otimize seu conteúdo, aumente o alcance orgânico e conecte-se com mais clientes na web.",
+          "Otimize seus conteúdos, aumente a visibilidade e conecte-se com mais clientes qualificados na web.",
         features: ["Insights de SEO", "Otimização de conteúdo"],
       },
       contracts: {
@@ -208,7 +208,7 @@ export const pt: Dictionary = {
         subtitle: "Documentos Inteligentes",
         description:
           "Elabore, gerencie e assine contratos imobiliários com agilidade assistida por IA.",
-        features: ["Redação com IA", "Documentos inteligentes", "Fluxo de assinatura"],
+        features: ["Minutas com IA", "Documentos inteligentes", "Fluxo de assinatura"],
       },
     },
   },
@@ -217,7 +217,7 @@ export const pt: Dictionary = {
     titleMain: "O glemO já",
     titleHighlight: "começou.",
     intro:
-      "Com uma rede ativa de parceiros gerando vendas, o marketplace oferece aplicativos proprietários de IA e a plataforma RWA criará trilhos entre ativos tokenizados e liquidez global.",
+      "Com uma rede ativa de parceiros gerando vendas, o marketplace oferece aplicativos proprietários de IA e a plataforma RWA criará as pontes entre ativos tokenizados e liquidez global.",
     signature: {
       line1: "ATIVOS REAIS",
       line2: "MERCADOS GLOBAIS",
@@ -233,7 +233,7 @@ export const pt: Dictionary = {
     eyebrow: "09 — ROADMAP",
     titleMain: "Roadmap de",
     titleHighlight: "36 meses",
-    subtitle: "Do presente para um mercado imobiliário mais aberto e conectado.",
+    subtitle: "Do presente para um mercado\nimobiliário mais aberto e conectado.",
     phases: {
       phase1: {
         year: "2026",
@@ -247,9 +247,9 @@ export const pt: Dictionary = {
       phase2: {
         year: "2027",
         items: [
-          "Integrações de IA e novos apps",
+          "Integrações de IA e novos aplicativos",
           "Mais de 10.000 parceiros",
-          "Lançamento do gO Token",
+          "Lançamento do token gO",
           "Lançamento da plataforma RWA",
         ],
       },
@@ -287,26 +287,26 @@ export const pt: Dictionary = {
       titleMain: "Nascido no mercado.",
       titleHighlight: "Presente onde o mercado acontece.",
       description:
-        "Conectando-se com quem molda o futuro do mercado imobiliário, da tecnologia e da inovação. Conheça os eventos onde o glemO compartilha visão e constrói relacionamentos.",
+        "Conectando-se com quem molda o futuro do mercado imobiliário, da tecnologia e da inovação. Conheça os eventos onde o glemO compartilha ideias e constrói relacionamentos.",
       items: [
         { title: "Web Summit Rio", detail: "2026 · Rio de Janeiro" },
         { title: "Summit ABRAINC", detail: "2025" },
         { title: "INC Minas", detail: "2025" },
         { title: "glemO na ABRAINC", detail: "2025 · Estande de exposição" },
         { title: "INC Interior Paulista", detail: "Galeria de eventos" },
-        { title: "Showcase glemO", detail: "2026 · Web Summit Rio" },
+        { title: "glemO Showcase", detail: "2026 · Web Summit Rio" },
         { title: "Uma nova experiência imobiliária", detail: "2025 · INC Minas" },
         { title: "glemO no Web Summit", detail: "2026 · Estande de exposição" },
       ],
     },
     cta: {
       titleMain: "O mercado imobiliário global está mudando.",
-      titleHighlight: "Estamos construindo a infraestrutura para essa transformação.",
+      titleHighlight: "Estamos construindo a infraestrutura para isso.",
       buttonPrimary: "Explorar o ecossistema",
       buttonSecondary: "Fale conosco",
     },
     footer: {
-      copyright: `© ${new Date().getFullYear()} glemO. Todos os direitos reservados.`,
+      copyright: "glemO. Todos os direitos reservados.",
     },
   },
 };

@@ -307,7 +307,7 @@ export const es: Dictionary = {
       buttonSecondary: "Hable con nosotros",
     },
     footer: {
-      copyright: `© ${new Date().getFullYear()} glemO. Todos los derechos reservados.`,
+      copyright: "glemO. Todos los derechos reservados.",
     },
   },
 };

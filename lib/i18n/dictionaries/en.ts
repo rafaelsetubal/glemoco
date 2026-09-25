@@ -300,7 +300,7 @@ export const en: Dictionary = {
       buttonSecondary: "Talk to us",
     },
     footer: {
-      copyright: `© ${new Date().getFullYear()} glemO. All rights reserved.`,
+      copyright: "glemO. All rights reserved.",
     },
   },
 };

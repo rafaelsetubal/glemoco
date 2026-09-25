@@ -300,7 +300,7 @@ export const ar: Dictionary = {
       buttonSecondary: "تحدث معنا",
     },
     footer: {
-      copyright: `© ${new Date().getFullYear()} glemO. جميع الحقوق محفوظة.`,
+      copyright: "glemO. جميع الحقوق محفوظة.",
     },
   },
 };
