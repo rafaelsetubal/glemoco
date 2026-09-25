@@ -166,10 +166,6 @@ export function ClosingSections() {
     </section>
 
     <section className="closing-cta" id="contact" aria-labelledby="closing-title">
-      <div className="closing-cta-globe" aria-hidden="true">
-        <img src="/closing/globe.webp" alt="" className="closing-cta-globe-img" />
-        <div className="closing-cta-globe-glow" />
-      </div>
       <div className="glemo-container closing-cta-layout">
         <div className="closing-cta-content">
           <h2 id="closing-title">
