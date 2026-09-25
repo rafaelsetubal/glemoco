@@ -32,16 +32,34 @@ export const galleryEvents: GalleryEventItem[] = [
     detail: "Londres, Reino Unido · Agora GBC",
   },
   {
+    id: "websummit-startup-showcase-2026",
+    image: "websummit-startup-showcase-2026.webp",
+    title: "Startup Showcase Google for Startups",
+    detail: "2026 · Web Summit Rio",
+  },
+  {
     id: "gbc-london-panel",
     image: "gbc-london-panel.webp",
     title: "Painel Global Blockchain Congress",
     detail: "Londres · Infraestrutura Web3 & RWA",
   },
   {
+    id: "websummit-rio-team-2026",
+    image: "websummit-rio-team-2026.webp",
+    title: "Time glemO no Web Summit Rio",
+    detail: "2026 · Rio de Janeiro",
+  },
+  {
     id: "gbc-london-app-demo",
     image: "gbc-london-app-demo.webp",
     title: "Demonstração glemO App",
     detail: "Londres · Global Blockchain Congress",
+  },
+  {
+    id: "websummit-rio-networking-2026",
+    image: "websummit-rio-networking-2026.webp",
+    title: "Networking no Web Summit Rio",
+    detail: "2026 · Conexões e Parcerias",
   },
   {
     id: "gbc-london-meeting",
@@ -84,12 +102,6 @@ export const galleryEvents: GalleryEventItem[] = [
     image: "imgCarrossel9.webp",
     title: "INC Interior Paulista",
     detail: "Galeria de eventos",
-  },
-  {
-    id: "glemo-showcase-2026",
-    image: "imgCarrossel14.webp",
-    title: "glemO Showcase",
-    detail: "2026 · Web Summit Rio",
   },
   {
     id: "nova-experiencia-2025",
