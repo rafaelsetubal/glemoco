@@ -4,14 +4,15 @@ import { cities, routesConfig } from "./globeData";
 
 const RADIUS = 1.48;
 
-export function geoPoint(lat: number, lon: number, r = RADIUS) {
+export function geoPoint(lat: number, lon: number, r = RADIUS, target = new THREE.Vector3()) {
   const phi = ((90 - lat) * Math.PI) / 180;
   const theta = ((lon + 180) * Math.PI) / 180;
-  return new THREE.Vector3(
+  target.set(
     -r * Math.sin(phi) * Math.cos(theta),
     r * Math.cos(phi),
     r * Math.sin(phi) * Math.sin(theta)
   );
+  return target;
 }
 
 let glowTextureCache: THREE.CanvasTexture | undefined;
@@ -34,39 +35,54 @@ function getGlowTexture() {
 }
 
 function buildLandPointGeometry() {
-  const positions: number[] = [];
-  const colors: number[] = [];
-  const sizes: number[] = [];
-  const step = typeof window !== "undefined" && window.innerWidth < 700 ? 1.9 : 1.2;
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 700;
+  const step = isMobile ? 1.9 : 1.2;
+  const samples = isMobile ? landSamples.mobile : landSamples.desktop;
+  const pointCount = samples.length >> 1;
 
-  // Geographic containment is precomputed offline, never on the UI thread.
-  const samples = step === 1.9 ? landSamples.mobile : landSamples.desktop;
+  const positions = new Float32Array(pointCount * 3);
+  const colors = new Float32Array(pointCount * 3);
+  const sizes = new Float32Array(pointCount);
+
+  let pIdx = 0;
+  let cIdx = 0;
+  let sIdx = 0;
+
   for (let i = 0; i < samples.length; i += 2) {
-      const lat = samples[i], lon = samples[i + 1];
+    const lat = samples[i];
+    const lon = samples[i + 1];
 
-      // Deterministic slight jitter for organic point cloud distribution
-      const seed = Math.sin(lon * 12.9898 + lat * 78.233) * 43758.5453;
-      const jitter = (seed - Math.floor(seed) - 0.5) * step * 0.24;
-      const pt = geoPoint(lat + jitter, lon - jitter, RADIUS * 1.006);
+    const seed = Math.sin(lon * 12.9898 + lat * 78.233) * 43758.5453;
+    const fract = seed - Math.floor(seed);
+    const jitter = (fract - 0.5) * step * 0.24;
 
-      positions.push(pt.x, pt.y, pt.z);
+    const phi = ((90 - (lat + jitter)) * Math.PI) / 180;
+    const theta = ((lon - jitter + 180) * Math.PI) / 180;
+    const r = RADIUS * 1.006;
 
-      // Point coloring: subtle crystalline cyan with strategic gold/amber micro-accents
-      const isAmberAccent = Math.abs(Math.sin((lat + lon * 1.4) * 0.22)) > 0.982;
-      if (isAmberAccent) {
-        colors.push(1.0, 0.6, 0.12);
-        sizes.push(0.014);
-      } else {
-        const brightness = 0.72 + Math.abs(Math.sin(lat * 0.14)) * 0.28;
-        colors.push(0.48 * brightness, 0.82 * brightness, 0.98 * brightness);
-        sizes.push(0.009 + (seed - Math.floor(seed)) * .006);
-      }
+    positions[pIdx++] = -r * Math.sin(phi) * Math.cos(theta);
+    positions[pIdx++] = r * Math.cos(phi);
+    positions[pIdx++] = r * Math.sin(phi) * Math.sin(theta);
+
+    const isAmberAccent = Math.abs(Math.sin((lat + lon * 1.4) * 0.22)) > 0.982;
+    if (isAmberAccent) {
+      colors[cIdx++] = 1.0;
+      colors[cIdx++] = 0.6;
+      colors[cIdx++] = 0.12;
+      sizes[sIdx++] = 0.014;
+    } else {
+      const brightness = 0.72 + Math.abs(Math.sin(lat * 0.14)) * 0.28;
+      colors[cIdx++] = 0.48 * brightness;
+      colors[cIdx++] = 0.82 * brightness;
+      colors[cIdx++] = 0.98 * brightness;
+      sizes[sIdx++] = 0.009 + fract * 0.006;
+    }
   }
 
   const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
-  geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
-  geometry.setAttribute("size", new THREE.Float32BufferAttribute(sizes, 1));
+  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+  geometry.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
   return geometry;
 }
 
@@ -78,9 +94,9 @@ export type GlobeHandle = {
 export function createGlobe(): GlobeHandle {
   const group = new THREE.Group();
 
-  // 1. Deep Dark Base Sphere with light edge occlusion
+  // 1. Deep Dark Base Sphere with light edge occlusion (Optimized 44x44 segments)
   const baseSphere = new THREE.Mesh(
-    new THREE.SphereGeometry(RADIUS, 64, 64),
+    new THREE.SphereGeometry(RADIUS, 44, 44),
     new THREE.MeshPhongMaterial({ color: 0x040c15, specular: 0x0a2434, shininess: 32 })
   );
   group.add(baseSphere);
@@ -120,7 +136,7 @@ export function createGlobe(): GlobeHandle {
 
   // 3. Volumetric Rim & Atmospheric Glow Layer (Additive back-side shell)
   const atmosphereRim = new THREE.Mesh(
-    new THREE.SphereGeometry(RADIUS * 1.018, 64, 64),
+    new THREE.SphereGeometry(RADIUS * 1.018, 44, 44),
     new THREE.ShaderMaterial({
       vertexShader: `varying vec3 vNormal; varying vec3 vView;
         void main(){ vec4 p=modelViewMatrix*vec4(position,1.);
@@ -155,15 +171,16 @@ export function createGlobe(): GlobeHandle {
 
   // 4. Strategic City Node Beacons
   const nodeSprites: { sprite: THREE.Sprite; baseScale: number; pulseSpeed: number; phase: number }[] = [];
+  const tempV1 = new THREE.Vector3();
 
   cities.forEach((c) => {
     const isAnchor = c.isStrategic && c.name === "São Paulo";
     const colorHex = isAnchor ? 0xff9a00 : c.isStrategic ? 0xffaa00 : 0x00baff;
-    const pt = geoPoint(c.latitude, c.longitude, RADIUS * 1.028);
+    const pt = geoPoint(c.latitude, c.longitude, RADIUS * 1.028, tempV1);
 
     // Inner core mesh dot
     const core = new THREE.Mesh(
-      new THREE.SphereGeometry(isAnchor ? 0.028 : 0.018, 16, 16),
+      new THREE.SphereGeometry(isAnchor ? 0.028 : 0.018, 12, 12),
       new THREE.MeshBasicMaterial({ color: isAnchor ? 0xffe1ae : 0xb8eeff })
     );
     core.position.copy(pt);
@@ -201,18 +218,20 @@ export function createGlobe(): GlobeHandle {
     progress: number;
   }[] = [];
 
+  const tempStart = new THREE.Vector3();
+  const tempEnd = new THREE.Vector3();
+
   routesConfig.forEach((cfg) => {
     const fromCity = cities[cfg.from];
     const toCity = cities[cfg.to];
-    const start = geoPoint(fromCity.latitude, fromCity.longitude, RADIUS * 1.026);
-    const end = geoPoint(toCity.latitude, toCity.longitude, RADIUS * 1.026);
+    const start = geoPoint(fromCity.latitude, fromCity.longitude, RADIUS * 1.026, tempStart);
+    const end = geoPoint(toCity.latitude, toCity.longitude, RADIUS * 1.026, tempEnd);
     
     // Elevate middle point for smooth curved arc
-    // Spherical path keeps the entire arc above the opaque surface.
     const arc = Array.from({ length: 49 }, (_, i) => {
       const t = i / 48;
       return start.clone().lerp(end, t).normalize().multiplyScalar(
-        RADIUS * (1.026 + Math.sin(Math.PI * t) * (cfg.altitude - 1) * .55)
+        RADIUS * (1.026 + Math.sin(Math.PI * t) * (cfg.altitude - 1) * 0.55)
       );
     });
     const curve = new THREE.CatmullRomCurve3(arc);
@@ -248,7 +267,7 @@ export function createGlobe(): GlobeHandle {
     group.add(new THREE.Points(dottedGeo, dottedMat));
 
     // C. Dynamic Traveling Packet (Beacon head)
-    const packetGeo = new THREE.SphereGeometry(isSig ? 0.024 : 0.016, 12, 12);
+    const packetGeo = new THREE.SphereGeometry(isSig ? 0.024 : 0.016, 10, 10);
     const packetMat = new THREE.MeshBasicMaterial({
       color: isSig ? 0xffb733 : 0x66d9ff,
     });
@@ -277,16 +296,18 @@ export function createGlobe(): GlobeHandle {
     });
   });
 
-  // Update loop for subtle packet motion & node breathing
+  // Update loop for subtle packet motion & node breathing (ZERO allocations per frame)
   const update = (time: number) => {
-    // 1. Animate traveling energy packets along routes
-    for (const pkt of packetMeshes) {
-      const pt = pkt.curve.getPointAt((pkt.progress + time * pkt.speed) % 1);
-      pkt.mesh.position.copy(pt);
+    // 1. Animate traveling energy packets along routes (Direct in-place position update)
+    for (let i = 0; i < packetMeshes.length; i++) {
+      const pkt = packetMeshes[i];
+      const u = (pkt.progress + time * pkt.speed) % 1;
+      pkt.curve.getPointAt(u, pkt.mesh.position);
     }
 
     // 2. Subtle organic breathing of node halos
-    for (const n of nodeSprites) {
+    for (let i = 0; i < nodeSprites.length; i++) {
+      const n = nodeSprites[i];
       const pulse = 1 + Math.sin(time * n.pulseSpeed + n.phase) * 0.14;
       n.sprite.scale.set(n.baseScale * pulse, n.baseScale * pulse, 1);
     }

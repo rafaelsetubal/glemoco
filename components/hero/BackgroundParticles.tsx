@@ -44,7 +44,8 @@ export function BackgroundParticles() {
     const random = () => Math.random();
 
     const size = () => {
-      const ratio = Math.min(devicePixelRatio, 1.5);
+      const isMobile = innerWidth <= 768;
+      const ratio = Math.min(window.devicePixelRatio || 1, isMobile ? 1.15 : 1.5);
       width = innerWidth;
       height = innerHeight;
       canvas.width = width * ratio;
@@ -211,15 +212,15 @@ export function BackgroundParticles() {
     observer.observe(canvas);
     size();
     draw();
-    addEventListener("resize", size);
-    addEventListener("pointermove", move);
+    window.addEventListener("resize", size, { passive: true });
+    window.addEventListener("pointermove", move, { passive: true });
 
     return () => {
       observer.disconnect();
       document.removeEventListener("visibilitychange", handleVisibility);
       cancelAnimationFrame(frame);
-      removeEventListener("resize", size);
-      removeEventListener("pointermove", move);
+      window.removeEventListener("resize", size);
+      window.removeEventListener("pointermove", move);
     };
   }, []);
 

@@ -6,15 +6,25 @@ import { createGlobe } from "./GlobeScene";
 
 export function HeroGlobe() {
   const mount = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const el = mount.current;
     if (!el) return;
+
     const startup = performance.now();
+    const isMobile = window.innerWidth <= 768;
+    const maxDpr = isMobile ? 1.15 : 1.5;
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 20);
     camera.position.z = 4.8;
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: !isMobile,
+      powerPreference: "high-performance",
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, maxDpr));
     el.appendChild(renderer.domElement);
 
     const { group: globeGroup, update: updateGlobe } = createGlobe();
@@ -24,7 +34,7 @@ export function HeroGlobe() {
     scene.add(globeGroup);
 
     // Subtle atmospheric ambient & key lights
-    scene.add(new THREE.HemisphereLight(0x99e6ff, 0x010306, .65));
+    scene.add(new THREE.HemisphereLight(0x99e6ff, 0x010306, 0.65));
     const keyLight = new THREE.DirectionalLight(0x81cbff, 2.8);
     keyLight.position.set(-2.5, 2.2, 3.2);
     scene.add(keyLight);
@@ -39,13 +49,14 @@ export function HeroGlobe() {
       targetY = -0.42,
       velocityX = 0,
       velocityY = 0;
+
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const resize = () => {
-      const w = el.clientWidth,
-        h = el.clientHeight;
+      const w = el.clientWidth;
+      const h = el.clientHeight;
       if (w > 0 && h > 0) {
-        renderer.setSize(w, h);
+        renderer.setSize(w, h, false);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
       }
@@ -72,7 +83,9 @@ export function HeroGlobe() {
 
     const up = (e: PointerEvent) => {
       dragging = false;
-      if (el.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId);
+      if (el.hasPointerCapture(e.pointerId)) {
+        el.releasePointerCapture(e.pointerId);
+      }
     };
 
     const animate = () => {
@@ -96,12 +109,15 @@ export function HeroGlobe() {
       updateGlobe(reduced ? 0 : elapsedTime);
 
       renderer.render(scene, camera);
+
       if (!el.dataset.ready) {
         el.dataset.ready = "true";
         el.dataset.initMs = String(Math.round(performance.now() - startup));
       }
+
       frame = requestAnimationFrame(animate);
     };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting;
@@ -109,6 +125,7 @@ export function HeroGlobe() {
       },
       { threshold: 0.01 }
     );
+
     const handleVisibilityChange = () => {
       if (document.hidden) {
         visible = false;
@@ -118,41 +135,58 @@ export function HeroGlobe() {
         }
       } else {
         visible = true;
+        clock.getDelta(); // flush delta so rotation doesn't leap
         if (!frame) animate();
       }
     };
+
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     const ro = new ResizeObserver(resize);
     ro.observe(el);
     resize();
     observer.observe(el);
-    addEventListener("resize", resize);
+
+    window.addEventListener("resize", resize, { passive: true });
     el.addEventListener("pointerdown", down);
-    el.addEventListener("pointermove", move);
+    el.addEventListener("pointermove", move, { passive: true });
     el.addEventListener("pointerup", up);
     el.addEventListener("pointercancel", up);
+
     animate();
+
     return () => {
       ro.disconnect();
       observer.disconnect();
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       cancelAnimationFrame(frame);
-      removeEventListener("resize", resize);
+      window.removeEventListener("resize", resize);
       el.removeEventListener("pointerdown", down);
       el.removeEventListener("pointermove", move);
       el.removeEventListener("pointerup", up);
       el.removeEventListener("pointercancel", up);
-      globeGroup.traverse(object => {
-        if (object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.Line) object.geometry.dispose();
-        if (object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.Line || object instanceof THREE.Sprite) {
+
+      globeGroup.traverse((object) => {
+        if (object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.Line) {
+          object.geometry.dispose();
+        }
+        if (
+          object instanceof THREE.Mesh ||
+          object instanceof THREE.Points ||
+          object instanceof THREE.Line ||
+          object instanceof THREE.Sprite
+        ) {
           const materials = Array.isArray(object.material) ? object.material : [object.material];
-          materials.forEach(material => material.dispose());
+          materials.forEach((material) => material.dispose());
         }
       });
+
       renderer.dispose();
-      el.removeChild(renderer.domElement);
+      if (renderer.domElement.parentElement) {
+        renderer.domElement.parentElement.removeChild(renderer.domElement);
+      }
     };
   }, []);
+
   return <div className="globe" ref={mount} role="application" aria-label="Interactive globe. Drag to rotate." />;
 }
