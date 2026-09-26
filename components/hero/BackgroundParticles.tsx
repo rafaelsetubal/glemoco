@@ -44,10 +44,10 @@ export function BackgroundParticles() {
     const random = () => Math.random();
 
     const size = () => {
-      const isMobile = innerWidth <= 768;
-      const ratio = Math.min(window.devicePixelRatio || 1, isMobile ? 1.15 : 1.5);
       width = innerWidth;
       height = innerHeight;
+      const isMobile = width <= 820;
+      const ratio = Math.min(window.devicePixelRatio || 1, isMobile ? 1.15 : 1.5);
       canvas.width = width * ratio;
       canvas.height = height * ratio;
       canvas.style.width = `${width}px`;
@@ -55,7 +55,7 @@ export function BackgroundParticles() {
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
 
       // Sparse spatial data coordinates
-      const count = width < 760 ? 30 : Math.min(70, Math.round((width * height) / 16000));
+      const count = isMobile ? 30 : Math.min(70, Math.round((width * height) / 16000));
       points = Array.from({ length: count }, () => ({
         x: random() * width,
         y: random() * height,
@@ -67,7 +67,6 @@ export function BackgroundParticles() {
       }));
 
       // Live traveling energy beacons overlaid along visual orbits
-      const isMobile = width <= 820;
       const cx = isMobile ? width * 0.5 : width * 0.68;
       const cy = isMobile ? height * 0.52 : height * 0.46;
       const baseR = Math.min(width, height) * (isMobile ? 0.32 : 0.38);
