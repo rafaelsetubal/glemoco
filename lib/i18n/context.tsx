@@ -35,13 +35,8 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
       const saved = localStorage.getItem(STORAGE_KEY) as Locale | null;
       if (saved && ["en", "pt", "es", "fr", "ar"].includes(saved)) {
         setLocaleState(saved);
-      } else {
-        const browserLang = navigator.language.toLowerCase();
-        if (browserLang.startsWith("pt")) setLocaleState("pt");
-        else if (browserLang.startsWith("es")) setLocaleState("es");
-        else if (browserLang.startsWith("fr")) setLocaleState("fr");
-        else if (browserLang.startsWith("ar")) setLocaleState("ar");
       }
+      // Padrão inicial sempre 'en' (Inglês) se não houver preferência explicitamente salva
     } catch {
       // ignore
     }
